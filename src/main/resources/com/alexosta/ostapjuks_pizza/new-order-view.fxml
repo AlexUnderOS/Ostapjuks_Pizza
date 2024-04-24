@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="CENTER" prefHeight="540.0" prefWidth="917.0" spacing="10.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.alexosta.ostapjuks_pizza.MenuController">
+    <children>
+        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="NEW ORDER">
+            <font>
+                <Font name="Comic Sans MS Bold" size="29.0" />
+            </font>
+        </Text>
+        <Pane prefHeight="384.0" prefWidth="737.0">
+            <children>
+                <TabPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="367.0" prefWidth="743.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                        <Tab text="Products">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                    <children>
+                                        <ListView fx:id="prod_listView" layoutX="103.0" layoutY="22.0" nodeOrientation="LEFT_TO_RIGHT" orientation="HORIZONTAL" prefHeight="338.4" prefWidth="743.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    </children>
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </padding>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                        <Tab text="Type">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                    <children>
+                              <ScrollPane layoutX="80.0" layoutY="24.0" prefHeight="291.0" prefWidth="623.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="0.0">
+                                 <content>
+                                    <HBox prefHeight="252.0" prefWidth="200.0">
+                                       <children>
+                                          <VBox alignment="CENTER" prefHeight="223.0" prefWidth="170.0" styleClass="pepper-types-vbox">
+                                             <children>
+                                                            <ImageView fitHeight="156.0" fitWidth="166.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@UI/imgs/Pepperoni.png" />
+                                                   </image>
+                                                   <effect>
+                                                      <DropShadow>
+                                                         <color>
+                                                            <Color opacity="0.5319149494171143" />
+                                                         </color>
+                                                      </DropShadow>
+                                                   </effect>
+                                                </ImageView>
+                                                <JFXCheckBox ellipsisString="" prefHeight="8.0" prefWidth="40.0" text=" " textAlignment="CENTER">
+                                                   <padding>
+                                                      <Insets bottom="10.0" left="10.0" />
+                                                   </padding>
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                </JFXCheckBox>
+                                                            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="194.0" spacing="20.0">
+                                                                <children>
+                                                                    <Label text="Pepperoni" textAlignment="CENTER">
+                                                                        <font>
+                                                                            <Font name="Comic Sans MS" size="17.0" />
+                                                                        </font>
+                                                                    </Label>
+                                                                </children>
+                                                            </HBox>
+                                                <HBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="184.0" spacing="10.0">
+                                                   <children>
+                                                                  <JFXRadioButton selected="true" text="S">
+                                                                      <toggleGroup>
+                                                                          <ToggleGroup fx:id="produkt_size" />
+                                                                      </toggleGroup>
+                                                                  </JFXRadioButton>
+                                                                  <JFXRadioButton text="M" toggleGroup="$produkt_size" />
+                                                                  <JFXRadioButton text="L" toggleGroup="$produkt_size" />
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </content>
+                                 <padding>
+                                    <Insets left="20.0" right="20.0" top="20.0" />
+                                 </padding>
+                              </ScrollPane>
+                                    </children>
+                           <padding>
+                              <Insets left="20.0" right="20.0" />
+                           </padding>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                        <Tab text="Amount">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                    <children>
+                              <HBox alignment="CENTER" layoutX="-76.0" layoutY="65.0" prefHeight="338.4" prefWidth="743.2" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="The number of ">
+                                       <font>
+                                          <Font name="Comic Sans MS" size="23.0" />
+                                       </font>
+                                    </Text>
+                                    <MenuButton mnemonicParsing="false" prefHeight="26.0" prefWidth="98.0" text="Product">
+                                      <items>
+                                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                                        <MenuItem mnemonicParsing="false" text="Action 2" />
+                                      </items>
+                                    </MenuButton>
+                                              <Spinner prefHeight="30.0" prefWidth="62.0" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                 </padding>
+                              </HBox>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                        <Tab text="Payment-method ">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                    <children>
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                              <HBox alignment="CENTER" prefHeight="242.0" prefWidth="743.0" spacing="10.0" styleClass="hbox-back">
+                                                  <children>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cash">
+                                             <font>
+                                                <Font name="Comic Sans MS Bold" size="23.0" />
+                                             </font>
+                                          </Text>
+                                                      <JFXButton fx:id="cash_btn" accessibleRole="RADIO_BUTTON" ellipsisString="" prefHeight="188.0" prefWidth="197.0" ripplerFill="WHITE" styleClass="big-btn" text=" " textFill="#ffffff00">
+                                                          <graphic>
+                                                              <ImageView fitHeight="87.0" fitWidth="117.0" pickOnBounds="true" preserveRatio="true">
+                                                                  <image>
+                                                                      <Image url="@UI/imgs/cash.png" />
+                                                                  </image>
+                                                              </ImageView>
+                                                          </graphic>
+                                                      </JFXButton>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="or">
+                                             <font>
+                                                <Font name="Comic Sans MS" size="23.0" />
+                                             </font>
+                                          </Text>
+                                                      <JFXButton fx:id="card_btn" accessibleRole="RADIO_BUTTON" ellipsisString="" prefHeight="188.0" prefWidth="197.0" ripplerFill="WHITE" styleClass="big-btn" text=" " textFill="#ffffff00">
+                                                          <graphic>
+                                                              <ImageView fitHeight="87.0" fitWidth="117.0" pickOnBounds="true" preserveRatio="true">
+                                                                  <image>
+                                                                      <Image url="@UI/imgs/card.png" />
+                                                                  </image>
+                                                              </ImageView>
+                                                          </graphic>
+                                                      </JFXButton>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Card">
+                                             <font>
+                                                <Font name="Comic Sans MS Bold" size="23.0" />
+                                             </font>
+                                          </Text>
+                                                  </children>
+                                              </HBox>
+                                    <Label alignment="TOP_CENTER" styleClass="paym-selection" text="Selected &quot;cash&quot;" textAlignment="CENTER" textFill="#008c2f">
+                                       <font>
+                                          <Font name="Comic Sans MS Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                 </padding>
+                              </VBox>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                        <Tab text="Result">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                    <children>
+                              <VBox layoutX="152.0" layoutY="98.0" prefHeight="338.4" prefWidth="743.2" spacing="4.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <ListView orientation="HORIZONTAL" prefHeight="154.0" prefWidth="743.0" />
+                                    <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                       <children>
+                                          <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@UI/imgs/Pepperoni.png" />
+                                             </image>
+                                          </ImageView>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="204.0">
+                                             <children>
+                                                <Label text="Product: Pizza">
+                                                   <font>
+                                                      <Font name="Comic Sans MS Bold" size="17.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Type: Pepperoni">
+                                                   <font>
+                                                      <Font name="Comic Sans MS Bold" size="17.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Discount: true">
+                                                   <font>
+                                                      <Font name="Comic Sans MS Bold" size="17.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <padding>
+                                                <Insets left="10.0" />
+                                             </padding>
+                                          </VBox>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="204.0">
+                                             <children>
+                                                <TextArea editable="false" prefHeight="200.0" prefWidth="200.0" text="23+34+34+34+34" wrapText="true">
+                                                   <font>
+                                                      <Font name="Cambria Math" size="15.0" />
+                                                   </font>
+                                                </TextArea>
+                                                <JFXCheckBox text="discount card">
+                                                   <font>
+                                                      <Font name="Comic Sans MS Bold" size="15.0" />
+                                                   </font>
+                                                </JFXCheckBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <padding>
+                                          <Insets top="10.0" />
+                                       </padding>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                                    <Label text="Total: 10.23 EUR">
+                                                        <font>
+                                                            <Font name="Comic Sans MS Bold" size="33.0" />
+                                                        </font>
+                                                    </Label>
+                                          <HBox alignment="BOTTOM_RIGHT" prefHeight="24.0" prefWidth="438.0" spacing="20.0">
+                                             <children>
+                                                <JFXButton buttonType="RAISED" prefHeight="40.0" prefWidth="90.0" ripplerFill="WHITE" styleClass="small-btn" text="Confirm" textFill="WHITE" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                 </padding>
+                              </VBox>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                    </tabs>
+                </TabPane>
+            </children>
+            <effect>
+                <DropShadow height="61.5" radius="29.875" width="60.0">
+                    <color>
+                        <Color red="1.0" opacity="0.3499999940395355" />
+                    </color>
+                </DropShadow>
+            </effect>
+        </Pane>
+    </children>
+    <padding>
+        <Insets left="90.0" right="90.0" />
+    </padding>
+</VBox>
