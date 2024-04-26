@@ -2,6 +2,7 @@ package com.alexosta.ostapjuks_pizza;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -34,22 +35,26 @@ public class FXDialogue {
         }
     }
 
-    public Optional<String> showPasswordDialog(String title, String headerText, String correctPassword) {
+    public void showLoginDialog(String title, String headerText, String correctUsername, String correctPassword) {
         Dialog<String> dialog = new Dialog<>();
         dialog.setTitle(title);
         dialog.setHeaderText(headerText);
 
+        TextField usernameField = new TextField();
         PasswordField passwordField = new PasswordField();
+        usernameField.setPromptText("Username");
         passwordField.setPromptText("Password");
 
-        VBox vbox = new VBox(passwordField);
+        VBox vbox = new VBox(usernameField, passwordField);
+        vbox.setSpacing(5);
         dialog.getDialogPane().setContent(vbox);
 
         ButtonType loginButtonType = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
 
         EventHandler<ActionEvent> filter = event -> {
-            if (!passwordField.getText().equals(correctPassword)) {
+            if (!passwordField.getText().equals(correctPassword) ||
+                    !usernameField.getText().equals(correctUsername)) {
                 System.exit(0);
             }
         };
@@ -64,6 +69,33 @@ public class FXDialogue {
             System.exit(0);
         });
 
-        return dialog.showAndWait();
+        dialog.showAndWait();
+    }
+
+    public void showRegistrationDialog(String title, String headerText) {
+        Dialog<String> dialog = new Dialog<>();
+        dialog.setTitle(title);
+        dialog.setHeaderText(headerText);
+
+        TextField usernameField = new TextField();
+        PasswordField passwordField = new PasswordField();
+        PasswordField paswConfirmField = new PasswordField();
+        usernameField.setPromptText("Username");
+        passwordField.setPromptText("Password");
+        paswConfirmField.setPromptText("Confirm");
+
+        VBox vbox = new VBox(usernameField, passwordField, paswConfirmField);
+        vbox.setSpacing(5);
+        dialog.getDialogPane().setContent(vbox);
+
+        ButtonType loginButtonType = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
+
+        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+        stage.setOnCloseRequest(event -> {
+            System.exit(0);
+        });
+
+        dialog.showAndWait();
     }
 }
