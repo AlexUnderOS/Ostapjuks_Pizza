@@ -10,8 +10,8 @@ import java.io.IOException;
 public class PizzaSelector extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-//        FXDialogue fxDialogue = new FXDialogue();
-//        fxDialogue.showPasswordDialog("Admin", "Log in", "admin");
+        CustomDialog dialogue = new CustomDialog();
+        dialogue.showLoginDialog();
 
         FXMLLoader fxmlLoader = new FXMLLoader(PizzaSelector.class.getResource("new-order-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1020, 580);
