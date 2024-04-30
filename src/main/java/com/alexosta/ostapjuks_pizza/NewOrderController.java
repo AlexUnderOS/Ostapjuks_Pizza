@@ -4,20 +4,25 @@ import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 
-public class MenuController {
+public class NewOrderController {
 
     @FXML
     private Button cash_btn, card_btn;
+
+    @FXML
+    private HBox productList_hBox;
 
     @FXML
     public ListView<String> prod_listView;
 
     @FXML
     public void initialize() {
-        Products prods = new Products();
-        prod_listView.getItems().addAll(prods.giveDataToListView().getItems());
+        new ProductBox(productList_hBox, "Pepperoni", "asd", "pizza/Pepperoni.png", 23);
+        new ProductBox(productList_hBox, "Kebab", "asd", "pizza/Kebab.png", 1);
+
         setAllResizableBtns();
     }
 

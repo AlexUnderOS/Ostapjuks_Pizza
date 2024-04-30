@@ -63,3 +63,7 @@
 .list-cell:selected {
     -fx-background-color: green;
 }
+
+.product-description:hover {
+    -fx-opacity: 0.9;
+}
