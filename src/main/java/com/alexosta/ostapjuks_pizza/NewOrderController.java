@@ -108,4 +108,7 @@ public class NewOrderController {
         return instance;
     }
 
+    public HBox getProductList_hBox() {
+        return productList_hBox;
+    }
 }

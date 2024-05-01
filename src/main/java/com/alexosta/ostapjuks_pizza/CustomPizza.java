@@ -15,6 +15,7 @@ import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.json.simple.JSONArray;
@@ -22,10 +23,14 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class CustomPizza {
 
@@ -65,9 +70,8 @@ public class CustomPizza {
                         imageMap.put(checkBox.getText(), productImage);
                         addImageToContainer(imageContainer_anchorPane);
                     }else {
-                            // Удаляем изображение из контейнера
-                            imageContainer_anchorPane.getChildren().remove(imageToManage);
-                            System.out.println("Image removed from container.");
+                        imageContainer_anchorPane.getChildren().remove(imageToManage);
+                        System.out.println("Image removed from container.");
                     }
                 });
             });
@@ -87,6 +91,43 @@ public class CustomPizza {
     public void createCustomPizza() {
         NewOrderController newOrderController = NewOrderController.getInstance();
         newOrderController.initialize();
+        HBox container = newOrderController.getProductList_hBox();
+        fillBoxJSONData(container);
+    }
+
+    private void fillBoxJSONData(HBox container) {
+        try {
+            String jsonPath = "src/main/resources/com/alexosta/ostapjuks_pizza/JSON/ProductsInRegister.json";
+            JSONParser parser = new JSONParser();
+            JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(jsonPath));
+
+            JSONArray pizzas = (JSONArray) jsonObject.get("pizzas");
+
+            JSONObject newPizza = new JSONObject();
+            newPizza.put("name", "New Pizza Name");
+            newPizza.put("description", translateToLine());
+            newPizza.put("image", "path/to/new/pizza/image.png");
+            newPizza.put("quantity", 10);
+
+            pizzas.add(newPizza);
+
+            FileWriter fileWriter = new FileWriter(jsonPath);
+            PrintWriter printWriter = new PrintWriter(fileWriter);
+            printWriter.write(jsonObject.toJSONString());
+            printWriter.flush();
+            printWriter.close();
+
+            new ProductBox(container, "Custom Pizza", translateToLine(), "custom_pizza/_dough.png", 100);
+
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String translateToLine() {
+        String line = "";
+        for (String prod : pizzaMap.keySet()) line += prod.toLowerCase() + ", ";
+        return line;
     }
 
     private void setSizeOfImageView(CustomPizzaController controller) {
