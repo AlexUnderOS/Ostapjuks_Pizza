@@ -1,5 +1,5 @@
 {
-  "products": [
+  "pizzas": [
     {
       "name": "Pepperoni",
       "description": "Mozzarella, pepperoni, pizza sauce\n",
@@ -53,6 +53,65 @@
       "description": "Domino's sauce, mozzarella, beef, bacon, onions, jalapenos\n",
       "image": "pizza/Mexican.png",
       "quantity": 12
+    }
+  ],
+
+  "custom-pizza": [
+    {
+      "name": "BBQ sauce",
+      "image": "custom_pizza/bbq_sauce.png"
+    },
+    {
+      "name": "ketchup",
+      "image": "custom_pizza/ketchup.png"
+    },
+    {
+      "name": "mayo",
+      "image": "custom_pizza/mayo.png"
+    },
+    {
+      "name": "bacon",
+      "image": "custom_pizza/bacon.png"
+    },
+    {
+      "name": "chicken",
+      "image": "custom_pizza/chicken.png"
+    },
+    {
+      "name": "hams",
+      "image": "custom_pizza/hams.png"
+    },
+    {
+      "name": "jalapenos",
+      "image": "custom_pizza/jalapenos.png"
+    },
+    {
+      "name": "mozzarella",
+      "image": "custom_pizza/mozzarella.png"
+    },
+    {
+      "name": "mushrooms",
+      "image": "custom_pizza/mushrooms.png"
+    },
+    {
+      "name": "onions",
+      "image": "custom_pizza/onions.png"
+    },
+    {
+      "name": "pickles",
+      "image": "custom_pizza/pickles.png"
+    },
+    {
+      "name": "pineapples",
+      "image": "custom_pizza/pineapples.png"
+    },
+    {
+      "name": "salami",
+      "image": "custom_pizza/salami.png"
+    },
+    {
+      "name": "tomatoes",
+      "image": "custom_pizza/tomatoes.png"
     }
   ]
 }

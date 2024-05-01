@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" prefHeight="540.0" prefWidth="917.0" spacing="10.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.alexosta.ostapjuks_pizza.NewOrderController">
+<VBox alignment="CENTER" prefHeight="550.0" prefWidth="920.0" spacing="10.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.alexosta.ostapjuks_pizza.NewOrderController">
     <children>
         <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="NEW ORDER">
             <font>
@@ -27,7 +27,7 @@
         </Text>
         <TabPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="428.0" prefWidth="737.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
             <tabs>
-                <Tab text="Categoryes">
+                <Tab text="Categories">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
@@ -52,17 +52,30 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="737.0">
                             <children>
-                                <ScrollPane hbarPolicy="ALWAYS" layoutX="87.0" layoutY="26.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="377.0" prefWidth="810.0" AnchorPane.bottomAnchor="52.0" AnchorPane.leftAnchor="67.0" AnchorPane.rightAnchor="49.0" AnchorPane.topAnchor="26.0">
-                                    <content>
-                                        <HBox fx:id="productList_hBox" prefHeight="338.0" prefWidth="1172.0" spacing="4.0" />
-                                    </content>
-                                    <padding>
-                                        <Insets left="20.0" right="20.0" top="20.0" />
-                                    </padding>
-                                </ScrollPane>
+                        <VBox prefHeight="460.0" prefWidth="736.8" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                                      <ScrollPane hbarPolicy="ALWAYS" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="412.0" prefWidth="727.0">
+                                          <content>
+                                              <HBox fx:id="productList_hBox" prefHeight="347.0" prefWidth="1172.0" spacing="4.0" />
+                                          </content>
+                                          <padding>
+                                              <Insets left="20.0" right="20.0" top="20.0" />
+                                          </padding>
+                                      </ScrollPane>
+                              <HBox alignment="CENTER" prefHeight="60.0" prefWidth="727.0" spacing="5.0">
+                                 <children>
+                                    <JFXButton onAction="#callCustomPizzaScene" opacity="0.7" prefHeight="48.0" prefWidth="130.0" ripplerFill="BLACK" styleClass="custom-pizza-btn" text="Custom Pizza" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
+                                    <JFXButton opacity="0.7" prefHeight="60.0" prefWidth="129.0" ripplerFill="BLACK" styleClass="edit-pizza-btn" text="Edit" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
                             </children>
                             <padding>
-                                <Insets left="20.0" right="20.0" />
+                                <Insets left="5.0" right="5.0" />
                             </padding>
                         </AnchorPane>
                     </content>
@@ -80,7 +93,7 @@
                                                         <Font name="Comic Sans MS Bold" size="23.0" />
                                                     </font>
                                                 </Text>
-                                                <JFXButton fx:id="cash_btn" accessibleRole="RADIO_BUTTON" ellipsisString="" prefHeight="291.0" prefWidth="197.0" ripplerFill="WHITE" styleClass="big-btn" text=" " textFill="#ffffff00">
+                                                <JFXButton fx:id="cash_btn" accessibleRole="RADIO_BUTTON" ellipsisString="" prefHeight="188.0" prefWidth="197.0" ripplerFill="WHITE" styleClass="big-btn" text=" " textFill="#ffffff00">
                                                     <graphic>
                                                         <ImageView fitHeight="87.0" fitWidth="117.0" pickOnBounds="true" preserveRatio="true">
                                                             <image>

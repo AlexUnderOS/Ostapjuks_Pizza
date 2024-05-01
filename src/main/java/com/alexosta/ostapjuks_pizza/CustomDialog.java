@@ -16,7 +16,7 @@ public class CustomDialog {
     private String password;
     private boolean dbApproved = false;
 
-    public void showLoginDialog() {
+    public void showLoginDialog(boolean closeEvent) {
         Stage primaryStage = new Stage();
         VBox root = new VBox();
 
@@ -26,7 +26,7 @@ public class CustomDialog {
         passwordField.setPromptText("Password");
 
         Button okButton = new Button("OK");
-        okButton.setOnAction(event -> {
+        okButton.setOnAction(_ -> {
             username = usernameField.getText();
             password = passwordField.getText();
             checkUsername(username);
@@ -46,7 +46,9 @@ public class CustomDialog {
         primaryStage.setTitle("Login");
         primaryStage.setScene(scene);
 
-        primaryStage.setOnCloseRequest(windowEvent -> System.exit(0));
+        if (closeEvent) {
+            primaryStage.setOnCloseRequest(_ -> System.exit(0));
+        }
         primaryStage.showAndWait();
     }
 

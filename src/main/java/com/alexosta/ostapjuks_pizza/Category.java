@@ -1,2 +1,4 @@
-package com.alexosta.ostapjuks_pizza;public class Category {
+package com.alexosta.ostapjuks_pizza;
+
+public class Category {
 }
