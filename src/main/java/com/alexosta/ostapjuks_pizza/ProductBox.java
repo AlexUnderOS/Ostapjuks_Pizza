@@ -3,10 +3,7 @@ package com.alexosta.ostapjuks_pizza;
 import com.jfoenix.controls.JFXRadioButton;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -20,13 +17,12 @@ public class ProductBox {
     private String title;
     private String description;
     private String imageUrl;
-    private int amountInStock;
+    private int quantityInStock;
 
-    public ProductBox(HBox container, String title, String description, String imageUrl, int amountInStock) {
+    public ProductBox(HBox container, String title, String description, String imageUrl, int quantityInStock) {
         this.title = title;
         this.description = description;
-        this.amountInStock = amountInStock;
-        // Debugging: Print the path before loading the resource
+        this.quantityInStock = quantityInStock;
         System.out.println("Attempting to load resource: UI/imgs/" + imageUrl);
         URL resourceUrl = getClass().getResource("UI/imgs/" + imageUrl);
         if (resourceUrl == null) {
@@ -53,8 +49,8 @@ public class ProductBox {
         HBox sizeSelectionHBox = createSizeSelectionHBox();
         vbox.getChildren().add(sizeSelectionHBox);
 
-        Label descriptionLabel = createDescriptionLabel();
-        vbox.getChildren().add(descriptionLabel);
+        TextField descriptionTextField = createDescriptionTextField();
+        vbox.getChildren().add(descriptionTextField);
 
         Spinner<Integer> inStockSpinner = createInStockSpinner();
         vbox.getChildren().add(inStockSpinner);
@@ -69,7 +65,7 @@ public class ProductBox {
 
     private Label createAmountInStockLabel() {
         Label amountInStockLabel = new Label();
-        amountInStockLabel.setText("In stock: "+(amountInStock));
+        amountInStockLabel.setText("In stock: "+(quantityInStock));
         amountInStockLabel.setFont(new Font("Comic Sans MS", 17.0));
         return amountInStockLabel;
     }
@@ -125,15 +121,14 @@ public class ProductBox {
         return radioButton;
     }
 
-    private Label createDescriptionLabel() {
-        Label descriptionLabel = new Label(description);
-        descriptionLabel.setAlignment(Pos.CENTER);
-        descriptionLabel.setTextAlignment(TextAlignment.CENTER);
-        descriptionLabel.setOpacity(0.35);
-        descriptionLabel.getStyleClass().add("product-description");
-        descriptionLabel.setWrapText(true);
-        descriptionLabel.setFont(new Font("Comic Sans MS Italic", 14.0));
-        return descriptionLabel;
+    private TextField createDescriptionTextField() {
+        TextField descriptionTextField = new TextField(description);
+        descriptionTextField.setAlignment(Pos.CENTER);
+        descriptionTextField.setOpacity(0.35);
+        descriptionTextField.getStyleClass().add("product-description");
+        descriptionTextField.setFont(new Font("Comic Sans MS Italic", 14.0));
+        descriptionTextField.setEditable(false);
+        return descriptionTextField;
     }
 
     private Spinner<Integer> createInStockSpinner() {
