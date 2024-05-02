@@ -12,12 +12,16 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 
 import java.net.URL;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ProductBox {
     private String title;
     private String description;
     private String imageUrl;
     private int quantityInStock;
+
+    private List<Product> productList = new LinkedList<>();
 
     public ProductBox(HBox container, String title, String description, String imageUrl, int quantityInStock) {
         this.title = title;
@@ -112,6 +116,8 @@ public class ProductBox {
 
         sizeSelectionHBox.getChildren().addAll(sizeSRadioButton, sizeMRadioButton, sizeLRadioButton);
 
+
+
         return sizeSelectionHBox;
     }
 
@@ -137,5 +143,9 @@ public class ProductBox {
         inStockSpinner.setPrefHeight(30.0);
         inStockSpinner.setPrefWidth(62.0);
         return inStockSpinner;
+    }
+
+    public List<Product> getProductList() {
+        return productList;
     }
 }

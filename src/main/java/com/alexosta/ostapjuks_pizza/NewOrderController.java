@@ -88,6 +88,7 @@ public class NewOrderController {
         ResultConfirming resultConfirming = new ResultConfirming();
         resultConfirming.createResult(selectedProducts, calculating_textArea);
 
+
     }
 
     @FXML

@@ -14,7 +14,8 @@ public class CustomDialog {
 
     private String username;
     private String password;
-    private boolean dbApproved = false;
+    private boolean dbApprovedPassword = false;
+    private boolean dbApprovedUsername = false;
 
     public void showLoginDialog(boolean closeEvent) {
         Stage primaryStage = new Stage();
@@ -31,7 +32,7 @@ public class CustomDialog {
             password = passwordField.getText();
             checkUsername(username);
             checkPassword(password);
-            if (dbApproved) {
+            if (dbApprovedPassword && dbApprovedUsername) {
                 primaryStage.close();
             }
         });
@@ -55,14 +56,14 @@ public class CustomDialog {
     private void checkUsername(String check) {
         System.out.println(">> username checked - " + check);
         if (check.equals("admin")) {
-            dbApproved = true;
+            dbApprovedUsername = true;
         }
     }
 
     private void checkPassword(String check) {
         System.out.println(">> password checked - " + check);
         if (check.equals("admin")) {
-            dbApproved = true;
+            dbApprovedPassword = true;
         }
     }
 }
