@@ -1,1 +1,117 @@
-{"pizzas":[{"image":"pizza\/Pepperoni.png","quantity":17,"name":"Pepperoni","description":"Mozzarella, pepperoni, pizza sauce\n"},{"image":"pizza\/Kebab.png","quantity":20,"name":"Kebab","description":"Domino's sauce, mozzarella, beef kebab, onions, pickles , kebab sauce\n"},{"image":"pizza\/5_Cheese.png","quantity":30,"name":"5 Cheese","description":"Blue cheese, mozzarella, parmesan, cream sauce, feta, cheddar\n"},{"image":"pizza\/Carbonara.png","quantity":15,"name":"Carbonara","description":"Bacon, ham, mushrooms, onion, mozzarella,cream sauce\n"},{"image":"pizza\/Barbecue.png","quantity":12,"name":"Barbecue","description":"Bacon, mushrooms, chicken, onion, mozzarella, barbecue bauce\n"},{"image":"pizza\/Ham_Mushroom.png","quantity":18,"name":"Ham & Mushrooms","description":"Ham, mushrooms, mozzarella, pizza sauce\n"},{"image":"pizza\/Hawaiian.png","quantity":14,"name":"Hawaiian","description":"Pineapple, ham, mozzarella, pizza sauce\n"},{"image":"pizza\/Veggie.png","quantity":10,"name":"Veggie","description":"Mushrooms, onion, mozzarella, black olives, paprika, pizza sauce, tomatoes\n"},{"image":"pizza\/Mexican.png","quantity":12,"name":"Mexican","description":"Domino's sauce, mozzarella, beef, bacon, onions, jalapenos\n"},{"image":"path\/to\/new\/pizza\/image.png","quantity":10,"name":"New Pizza Name","description":""}],"custom-pizza":[{"image":"custom_pizza\/bbq_sauce.png","name":"BBQ sauce"},{"image":"custom_pizza\/ketchup.png","name":"ketchup"},{"image":"custom_pizza\/mayo.png","name":"mayo"},{"image":"custom_pizza\/bacon.png","name":"bacon"},{"image":"custom_pizza\/chicken.png","name":"chicken"},{"image":"custom_pizza\/hams.png","name":"hams"},{"image":"custom_pizza\/jalapenos.png","name":"jalapenos"},{"image":"custom_pizza\/mozzarella.png","name":"mozzarella"},{"image":"custom_pizza\/mushrooms.png","name":"mushrooms"},{"image":"custom_pizza\/onions.png","name":"onions"},{"image":"custom_pizza\/pickles.png","name":"pickles"},{"image":"custom_pizza\/pineapples.png","name":"pineapples"},{"image":"custom_pizza\/salami.png","name":"salami"},{"image":"custom_pizza\/tomatoes.png","name":"tomatoes"}]}
+{
+  "pizzas": [
+    {
+      "name": "Pepperoni",
+      "description": "Mozzarella, pepperoni, pizza sauce\n",
+      "image": "pizza/Pepperoni.png",
+      "quantity": 17
+    },
+    {
+      "name": "Kebab",
+      "description": "Domino's sauce, mozzarella, beef kebab, onions, pickles , kebab sauce\n",
+      "image": "pizza/Kebab.png",
+      "quantity": 20
+    },
+    {
+      "name": "5 Cheese",
+      "description": "Blue cheese, mozzarella, parmesan, cream sauce, feta, cheddar\n",
+      "image": "pizza/5_Cheese.png",
+      "quantity": 30
+    },
+    {
+      "name": "Carbonara",
+      "description": "Bacon, ham, mushrooms, onion, mozzarella,cream sauce\n",
+      "image": "pizza/Carbonara.png",
+      "quantity": 15
+    },
+    {
+      "name": "Barbecue",
+      "description": "Bacon, mushrooms, chicken, onion, mozzarella, barbecue bauce\n",
+      "image": "pizza/Barbecue.png",
+      "quantity": 12
+    },
+    {
+      "name": "Ham & Mushrooms",
+      "description": "Ham, mushrooms, mozzarella, pizza sauce\n",
+      "image": "pizza/Ham_Mushroom.png",
+      "quantity": 18
+    },
+    {
+      "name": "Hawaiian",
+      "description": "Pineapple, ham, mozzarella, pizza sauce\n",
+      "image": "pizza/Hawaiian.png",
+      "quantity": 14
+    },
+    {
+      "name": "Veggie",
+      "description": "Mushrooms, onion, mozzarella, black olives, paprika, pizza sauce, tomatoes\n",
+      "image": "pizza/Veggie.png",
+      "quantity": 10
+    },
+    {
+      "name": "Mexican",
+      "description": "Domino's sauce, mozzarella, beef, bacon, onions, jalapenos\n",
+      "image": "pizza/Mexican.png",
+      "quantity": 12
+    }
+  ],
+
+  "custom-pizza": [
+    {
+      "name": "BBQ sauce",
+      "image": "custom_pizza/bbq_sauce.png"
+    },
+    {
+      "name": "ketchup",
+      "image": "custom_pizza/ketchup.png"
+    },
+    {
+      "name": "mayo",
+      "image": "custom_pizza/mayo.png"
+    },
+    {
+      "name": "bacon",
+      "image": "custom_pizza/bacon.png"
+    },
+    {
+      "name": "chicken",
+      "image": "custom_pizza/chicken.png"
+    },
+    {
+      "name": "hams",
+      "image": "custom_pizza/hams.png"
+    },
+    {
+      "name": "jalapenos",
+      "image": "custom_pizza/jalapenos.png"
+    },
+    {
+      "name": "mozzarella",
+      "image": "custom_pizza/mozzarella.png"
+    },
+    {
+      "name": "mushrooms",
+      "image": "custom_pizza/mushrooms.png"
+    },
+    {
+      "name": "onions",
+      "image": "custom_pizza/onions.png"
+    },
+    {
+      "name": "pickles",
+      "image": "custom_pizza/pickles.png"
+    },
+    {
+      "name": "pineapples",
+      "image": "custom_pizza/pineapples.png"
+    },
+    {
+      "name": "salami",
+      "image": "custom_pizza/salami.png"
+    },
+    {
+      "name": "tomatoes",
+      "image": "custom_pizza/tomatoes.png"
+    }
+  ]
+}
