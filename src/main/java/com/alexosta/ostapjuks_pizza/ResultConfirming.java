@@ -10,6 +10,6 @@ public class ResultConfirming {
         NewOrderController controller = new NewOrderController().getInstance();
         discountCard = controller.getDiscountCard();
 
-        System.out.println(discountCard + "!!!");
+        Receipts receipts = new Receipts();
     }
 }

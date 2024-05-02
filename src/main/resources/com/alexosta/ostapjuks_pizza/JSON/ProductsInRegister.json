@@ -4,55 +4,64 @@
       "name": "Pepperoni",
       "description": "Mozzarella, pepperoni, pizza sauce\n",
       "image": "pizza/Pepperoni.png",
-      "quantity": 17
+      "quantity": 17,
+      "price" : 9.99
     },
     {
       "name": "Kebab",
       "description": "Domino's sauce, mozzarella, beef kebab, onions, pickles , kebab sauce\n",
       "image": "pizza/Kebab.png",
-      "quantity": 20
+      "quantity": 20,
+      "price" : 9.99
     },
     {
       "name": "5 Cheese",
       "description": "Blue cheese, mozzarella, parmesan, cream sauce, feta, cheddar\n",
       "image": "pizza/5_Cheese.png",
-      "quantity": 30
+      "quantity": 30,
+      "price" : 9.99
     },
     {
       "name": "Carbonara",
       "description": "Bacon, ham, mushrooms, onion, mozzarella,cream sauce\n",
       "image": "pizza/Carbonara.png",
-      "quantity": 15
+      "quantity": 15,
+      "price" : 9.99
     },
     {
       "name": "Barbecue",
       "description": "Bacon, mushrooms, chicken, onion, mozzarella, barbecue bauce\n",
       "image": "pizza/Barbecue.png",
-      "quantity": 12
+      "quantity": 12,
+      "price" : 9.99
     },
     {
       "name": "Ham & Mushrooms",
       "description": "Ham, mushrooms, mozzarella, pizza sauce\n",
       "image": "pizza/Ham_Mushroom.png",
-      "quantity": 18
+      "quantity": 18,
+      "price" : 8.99
     },
     {
       "name": "Hawaiian",
       "description": "Pineapple, ham, mozzarella, pizza sauce\n",
       "image": "pizza/Hawaiian.png",
-      "quantity": 14
+      "quantity": 14,
+      "price" : 6.99
     },
     {
       "name": "Veggie",
       "description": "Mushrooms, onion, mozzarella, black olives, paprika, pizza sauce, tomatoes\n",
       "image": "pizza/Veggie.png",
-      "quantity": 10
+      "quantity": 10,
+      "price" : 9.99
     },
     {
       "name": "Mexican",
       "description": "Domino's sauce, mozzarella, beef, bacon, onions, jalapenos\n",
       "image": "pizza/Mexican.png",
-      "quantity": 12
+      "quantity": 12,
+      "price" : 9.99
     }
   ],
 
