@@ -63,6 +63,7 @@ public class ProductBox {
         return vbox;
     }
 
+
     private Label createAmountInStockLabel() {
         Label amountInStockLabel = new Label();
         amountInStockLabel.setText("In stock: "+(quantityInStock));

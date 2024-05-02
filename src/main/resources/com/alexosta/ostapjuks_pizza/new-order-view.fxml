@@ -65,7 +65,8 @@
                               <HBox alignment="CENTER" prefHeight="60.0" prefWidth="727.0" spacing="5.0">
                                  <children>
                                     <JFXButton onAction="#callCustomPizzaScene" opacity="0.7" prefHeight="48.0" prefWidth="130.0" ripplerFill="BLACK" styleClass="custom-pizza-btn" text="Custom Pizza" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
-                                    <JFXButton opacity="0.7" prefHeight="60.0" prefWidth="129.0" ripplerFill="BLACK" styleClass="edit-pizza-btn" text="Edit" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
+                                    <JFXButton onAction="#showEditOrders" opacity="0.7" prefHeight="60.0" prefWidth="129.0" ripplerFill="BLACK" styleClass="edit-pizza-btn" text="Edit" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
+                                    <JFXButton onAction="#reloadPage" opacity="0.7" prefHeight="48.0" prefWidth="130.0" ripplerFill="BLACK" styleClass="custom-pizza-btn" text="Reload" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
                                  </children>
                                  <padding>
                                     <Insets bottom="10.0" top="10.0" />
@@ -93,7 +94,7 @@
                                                         <Font name="Comic Sans MS Bold" size="23.0" />
                                                     </font>
                                                 </Text>
-                                                <JFXButton fx:id="cash_btn" accessibleRole="RADIO_BUTTON" ellipsisString="" prefHeight="188.0" prefWidth="197.0" ripplerFill="WHITE" styleClass="big-btn" text=" " textFill="#ffffff00">
+                                                <JFXButton fx:id="cash_btn" accessibleRole="RADIO_BUTTON" ellipsisString="" onAction="#switchPayTypeToCash" prefHeight="188.0" prefWidth="197.0" ripplerFill="WHITE" styleClass="big-btn" text=" " textFill="#ffffff00">
                                                     <graphic>
                                                         <ImageView fitHeight="87.0" fitWidth="117.0" pickOnBounds="true" preserveRatio="true">
                                                             <image>
@@ -107,7 +108,7 @@
                                                         <Font name="Comic Sans MS" size="23.0" />
                                                     </font>
                                                 </Text>
-                                                <JFXButton fx:id="card_btn" accessibleRole="RADIO_BUTTON" ellipsisString="" prefHeight="188.0" prefWidth="197.0" ripplerFill="WHITE" styleClass="big-btn" text=" " textFill="#ffffff00">
+                                                <JFXButton fx:id="card_btn" accessibleRole="RADIO_BUTTON" ellipsisString="" onAction="#switchPayTypeToCard" prefHeight="188.0" prefWidth="197.0" ripplerFill="WHITE" styleClass="big-btn" text=" " textFill="#ffffff00">
                                                     <graphic>
                                                         <ImageView fitHeight="87.0" fitWidth="117.0" pickOnBounds="true" preserveRatio="true">
                                                             <image>
@@ -123,7 +124,7 @@
                                                 </Text>
                                             </children>
                                         </HBox>
-                                        <Label fx:id="paymentSelection_label" alignment="TOP_CENTER" styleClass="paym-selection" text="Selected &quot;cash&quot;" textAlignment="CENTER" textFill="#008c2f">
+                                        <Label fx:id="paymentSelection_label" alignment="TOP_CENTER" styleClass="paym-selection" text="Selected 'cash'" textAlignment="CENTER" textFill="#008c2f">
                                             <font>
                                                 <Font name="Comic Sans MS Bold" size="18.0" />
                                             </font>
@@ -143,12 +144,12 @@
                             <children>
                                 <BorderPane prefHeight="414.0" prefWidth="737.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                                     <top>
-                                        <ListView orientation="HORIZONTAL" prefHeight="154.0" prefWidth="743.0" BorderPane.alignment="CENTER" />
+                                        <ListView fx:id="listOfProducts" orientation="HORIZONTAL" prefHeight="154.0" prefWidth="743.0" BorderPane.alignment="CENTER" />
                                     </top>
                                     <left>
                                         <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER_RIGHT">
                                             <children>
-                                                <ImageView fitHeight="189.0" fitWidth="263.0" pickOnBounds="true" preserveRatio="true">
+                                                <ImageView fx:id="product_imageView" fitHeight="189.0" fitWidth="263.0" pickOnBounds="true" preserveRatio="true">
                                                 </ImageView>
                                             </children>
                                             <opaqueInsets>
@@ -162,7 +163,7 @@
                                     <bottom>
                                         <HBox prefHeight="67.0" prefWidth="717.0">
                                             <children>
-                                                <Label prefHeight="67.0" prefWidth="497.0" text="Total: 10.23 EUR">
+                                                <Label fx:id="totalPrice_label" prefHeight="67.0" prefWidth="497.0" text="Total: 10.23 EUR">
                                                     <font>
                                                         <Font name="Comic Sans MS Bold" size="33.0" />
                                                     </font>
@@ -173,12 +174,12 @@
                                     <right>
                                         <VBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
                                             <children>
-                                                <TextArea editable="false" prefHeight="200.0" prefWidth="200.0" text="23+34+34+34+34" wrapText="true">
+                                                <TextArea fx:id="calculating_textArea" editable="false" prefHeight="200.0" prefWidth="200.0" text="23+34+34+34+34" wrapText="true">
                                                     <font>
                                                         <Font name="Cambria Math" size="15.0" />
                                                     </font>
                                                 </TextArea>
-                                                <JFXCheckBox text="discount card">
+                                                <JFXCheckBox fx:id="discountCard_checkBox" onAction="#setDiscountCard" text="discount card">
                                                     <font>
                                                         <Font name="Comic Sans MS Bold" size="15.0" />
                                                     </font>
@@ -189,17 +190,7 @@
                                     <center>
                                         <VBox alignment="CENTER_LEFT" prefHeight="214.0" prefWidth="274.0" BorderPane.alignment="CENTER">
                                             <children>
-                                                <Label text="Product: Pizza">
-                                                    <font>
-                                                        <Font name="Comic Sans MS Bold" size="17.0" />
-                                                    </font>
-                                                </Label>
-                                                <Label text="Type: Pepperoni">
-                                                    <font>
-                                                        <Font name="Comic Sans MS Bold" size="17.0" />
-                                                    </font>
-                                                </Label>
-                                                <Label text="Discount: true">
+                                                <Label fx:id="selectedProduct" text="Selected Product">
                                                     <font>
                                                         <Font name="Comic Sans MS Bold" size="17.0" />
                                                     </font>
@@ -211,7 +202,7 @@
                                         </VBox>
                                     </center>
                                 </BorderPane>
-                                <JFXButton buttonType="RAISED" layoutY="330.0" prefHeight="49.0" prefWidth="139.0" ripplerFill="WHITE" styleClass="small-btn" text="Confirm" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+                                <JFXButton buttonType="RAISED" layoutY="330.0" onAction="#confirmOrderResult_btn" prefHeight="49.0" prefWidth="139.0" ripplerFill="WHITE" styleClass="small-btn" text="Confirm" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
                             </children>
                         </AnchorPane>
                     </content>
