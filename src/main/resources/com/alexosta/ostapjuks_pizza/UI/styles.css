@@ -45,7 +45,7 @@
     -fx-background-radius: 30%;
     -fx-border-color: #f0e1ad;
     -fx-border-radius: 30%;
-    -fx-border-width: 6px;
+    -fx-border-width: 10px;
 }
 
 .list-view {
@@ -62,4 +62,29 @@
 
 .list-cell:selected {
     -fx-background-color: green;
+}
+
+.product-description:hover {
+    -fx-opacity: 0.9;
+    -fx-min-width: 200px;
+}
+
+.product-description {
+    -fx-min-width: 170px;
+    -fx-min-height: 50px;
+}
+
+.custom-pizza-btn {
+    -fx-background-color: green;
+}
+.custom-pizza-btn:hover {
+    -fx-opacity: 0.8;
+}
+
+
+.edit-pizza-btn {
+    -fx-background-color: #3126ff;
+}
+.edit-pizza-btn:hover {
+    -fx-opacity: 0.8;
 }
