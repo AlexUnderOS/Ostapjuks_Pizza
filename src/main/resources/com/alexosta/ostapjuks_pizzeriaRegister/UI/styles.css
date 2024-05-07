@@ -1,0 +1,90 @@
+.big-btn {
+    -fx-background-color: #fca92b;
+    -fx-border-radius: 25%;
+    -fx-background-radius: 30%;
+    -fx-border-width: 14px;
+    -fx-border-color: #db9832;
+}
+.big-btn:hover {
+    -fx-border-width: 19px;
+
+}
+
+.root {
+    -fx-background-image: url("imgs/pizza-back.jpg");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+
+.tab-header-background {
+    -fx-background-image: url("imgs/pepperoni-back.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+
+
+.tab-label {
+    -fx-text-fill: black;
+    -fx-font: 12pt "Comic Sans MS";
+    -fx-font-weight: bold;
+}
+.tab-pane {
+    -fx-background-image: url("imgs/b-texture.jpg");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+.tab-pane .tab-header-area .tab {
+    -fx-padding: 3 10 3 10;
+}
+
+.pepper-types-vbox {
+    -fx-background-color: #faeab6;
+    -fx-background-radius: 30%;
+    -fx-border-color: #f0e1ad;
+    -fx-border-radius: 30%;
+    -fx-border-width: 10px;
+}
+
+.list-view {
+    -fx-font: 15pt "Comic Sans MS";
+}
+
+.paym-selection {
+    -fx-background-color: #cbf5cd;
+}
+
+.small-btn {
+    -fx-background-color: green;
+}
+
+.list-cell:selected {
+    -fx-background-color: green;
+}
+
+.product-description:hover {
+    -fx-opacity: 0.9;
+    -fx-min-width: 200px;
+}
+
+.product-description {
+    -fx-min-width: 170px;
+    -fx-min-height: 50px;
+}
+
+.custom-pizza-btn {
+    -fx-background-color: green;
+}
+.custom-pizza-btn:hover {
+    -fx-opacity: 0.8;
+}
+
+
+.edit-pizza-btn {
+    -fx-background-color: #3126ff;
+}
+.edit-pizza-btn:hover {
+    -fx-opacity: 0.8;
+}
