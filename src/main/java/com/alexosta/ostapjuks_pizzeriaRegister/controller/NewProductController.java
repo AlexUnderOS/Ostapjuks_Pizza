@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
@@ -27,21 +28,21 @@ import java.util.Scanner;
 public class NewProductController {
 
     @FXML
-    private TextField categoryTextField, productNameTextField, quantityTextField, priceTextField;
+    private TextField categoryTextField, productNameTextField, priceTextField, minutesTextField;
 
     @FXML
-    private TextArea descriptionTextArea;
+    private TextArea ingredientListTextArea;
 
     @FXML
-    private CheckBox availableCheckBox;
+    private Label alarmLabel;
+
 
     private static final Stage newStage = new Stage();
 
 
-    private String category, productName, imageLink, description;
-    private int quantity;
+    private String category, productName, imageLink, ingredientList;
+    private int minutes;
     private double price;
-    private boolean available;
 
     private FileChooser fileChooser = new FileChooser();
     public Stage getStageOfNewProductScene() throws IOException {
@@ -56,7 +57,7 @@ public class NewProductController {
     }
 
     @FXML
-    private void addImage() {
+    private void searchImage() {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(newStage);
         if (file!= null) {
@@ -86,13 +87,17 @@ public class NewProductController {
     }
 
     private void updateData() {
-        category = categoryTextField.getText();
-        price = Double.parseDouble(priceTextField.getText());
-        quantity = Integer.parseInt(quantityTextField.getText());
-        available = availableCheckBox.isSelected();
-        description = descriptionTextArea.getText();
-        productName = productNameTextField.getText();
+        try {
+            category = categoryTextField.getText();
+            price = Double.parseDouble(priceTextField.getText());
+            productName = productNameTextField.getText();
+            ingredientList = ingredientListTextArea.getText();
+            minutes = Integer.parseInt(minutesTextField.getText());
 
-        DBProduct.writeToDatabase(category, price, quantity, imageLink, available, description, productName);
+            DBProduct.writeToDatabase(category, price, imageLink, productName, ingredientList, minutes);
+            alarmLabel.setText("");
+        }catch (NumberFormatException ex) {
+            alarmLabel.setText("* enter correct data!");
+        }
     }
 }

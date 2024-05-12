@@ -39,7 +39,7 @@ public class CustomPizzaController {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("custom-pizza-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         scene.getStylesheets().add(Objects.requireNonNull(
-                getClass().getResource("UI/creator-styles.css")).toExternalForm());
+                Main.class.getResource("UI/creator-styles.css")).toExternalForm());
 
         newStage.setTitle("Create Custom Pizza!");
         newStage.setScene(scene);

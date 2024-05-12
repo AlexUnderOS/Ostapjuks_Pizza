@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
@@ -60,19 +61,64 @@
                      <children>
                         <HBox prefHeight="460.0" prefWidth="736.8" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <ListView fx:id="productListView" prefHeight="425.0" prefWidth="494.0" HBox.hgrow="ALWAYS" />
+                              <ScrollPane prefHeight="425.0" prefWidth="652.0" vbarPolicy="ALWAYS" HBox.hgrow="ALWAYS">
+                                 <content>
+                                    <VBox fx:id="productListVBox">
+                                       <children>
+                                       </children>
+                                    </VBox>
+                                 </content>
+                              </ScrollPane>
                               <VBox alignment="TOP_CENTER" prefHeight="425.0" prefWidth="233.0" spacing="5.0">
                                  <children>
-                                    <TextField prefHeight="30.0" prefWidth="81.0" promptText="product name" />
                                     <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#createNewProduct" prefWidth="90.0" text="New" />
-                                    <Button disable="true" minWidth="-Infinity" mnemonicParsing="false" prefWidth="90.0" text="Edit" underline="true" />
-                                    <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#updateListView" prefWidth="90.0" text="Update List" />
+                                    <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#updateProductListView" prefWidth="90.0" text="Update List" />
+                                    <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#deleteProductByName" prefWidth="90.0" text="Delete" />
                                  </children>
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
                                  <padding>
                                     <Insets left="20.0" right="20.0" top="40.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Ingredients">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <HBox prefHeight="460.0" prefWidth="736.8" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <ScrollPane prefHeight="425.0" prefWidth="400.0" vbarPolicy="ALWAYS" HBox.hgrow="ALWAYS">
+                                 <content>
+                                    <VBox fx:id="ingredientListVBox" />
+                                 </content></ScrollPane>
+                              <VBox alignment="TOP_CENTER" prefHeight="425.0" prefWidth="233.0" spacing="5.0">
+                                 <children>
+                                    <TextField fx:id="ingredientNameTextField" prefHeight="30.0" prefWidth="203.0" promptText="ingredient name" />
+                                    <TextField fx:id="ingredientQuantityTextField" prefHeight="30.0" prefWidth="110.0" promptText="quantity" />
+                                    <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#addNewIngredient" prefWidth="90.0" text="New" />
+                                    <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#updateIngredientsListView" prefWidth="90.0" text="Update List" />
+                                    <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#deleteIngredientByName" prefWidth="90.0" text="Delete" />
+                                    <Label fx:id="ingredientAlaramLabel" textFill="RED">
+                                       <font>
+                                          <Font name="Times New Roman Italic" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <padding>
+                                    <Insets left="15.0" right="15.0" top="40.0" />
                                  </padding>
                               </VBox>
                            </children>

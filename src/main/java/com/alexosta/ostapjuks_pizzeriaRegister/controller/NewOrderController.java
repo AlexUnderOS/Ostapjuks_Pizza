@@ -2,7 +2,6 @@ package com.alexosta.ostapjuks_pizzeriaRegister.controller;
 
 import com.alexosta.ostapjuks_pizzeriaRegister.*;
 import com.alexosta.ostapjuks_pizzeriaRegister.animations.ResizeAnimation;
-import com.alexosta.ostapjuks_pizzeriaRegister.domain.Category;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,86 +16,28 @@ import java.util.Objects;
 public class NewOrderController {
 
     private static NewOrderController instance;
-    private static ResizeAnimation resizeAnim;
 
     @FXML
-    private Button cashBtn, cardBtn;
+    public ListView<String> listOfProducts;
 
     @FXML
-    private HBox productListHBox;
+    public HBox productHBox;
 
-    @FXML
-    public ListView<String> categoryListView, listOfProducts;
 
-    @FXML
-    private Label paymentSelectionLabel, selectedProduct, totalPriceLabel;
-
-    @FXML
-    private CheckBox discountCardCheckBox;
-
-    @FXML
-    private TextArea calculatingTextArea;
-
-    private boolean discountCard = false;
 
     @FXML
     public void initialize() {
-        resizeAnim = new ResizeAnimation();
         instance = this;
-        productListHBox.getChildren().clear();
-        setAllResizableBtnsInNewOrder();
-        displayProductList();
     }
-
-    @FXML
-    private void setDiscountCard() {
-        if (discountCardCheckBox.isSelected()) {
-            discountCard = true;
-        }else {
-            discountCard = false;
-        }
-    }
-
-    private void displayProductList() {
-        Category category = new Category();
-        category.fillCategory(categoryListView);
-    }
-
-    public boolean getDiscountCard() {
-        return discountCard;
-    }
-
-
 
     @FXML
     private void confirmOrderResultBtn() {
-        PaymentConfirming resultConfirming = new PaymentConfirming();
-        resultConfirming.createResult(selectedProduct, totalPriceLabel, calculatingTextArea);
-
-
+        System.out.println("We do something to confirm our order.");
     }
 
     @FXML
     private void reloadPage() {
         initialize();
-    }
-
-    @FXML
-    private void switchPayTypeToCash() {
-        System.out.println("cash");
-        paymentSelectionLabel.setText("Selected 'cash'");
-
-    }
-
-    @FXML
-    private void switchPayTypeToCard() {
-        System.out.println("card");
-        paymentSelectionLabel.setText("Selected 'card'");
-    }
-
-    private void setAllResizableBtnsInNewOrder() {
-        resizeAnim.setButtonHoverHandlers(cashBtn);
-        resizeAnim.setButtonHoverHandlers(cardBtn);
     }
 
     public void callCustomPizzaScene() throws IOException {
@@ -125,7 +66,4 @@ public class NewOrderController {
         return instance;
     }
 
-    public HBox getProductList_hBox() {
-        return productListHBox;
-    }
 }

@@ -2,6 +2,8 @@ package com.alexosta.ostapjuks_pizzeriaRegister.controller;
 
 import com.alexosta.ostapjuks_pizzeriaRegister.Main;
 import com.alexosta.ostapjuks_pizzeriaRegister.animations.ResizeAnimation;
+import com.alexosta.ostapjuks_pizzeriaRegister.model.IngredientBox;
+import com.alexosta.ostapjuks_pizzeriaRegister.model.ProductBox;
 import com.alexosta.ostapjuks_pizzeriaRegister.service.DBProduct;
 import com.alexosta.ostapjuks_pizzeriaRegister.view.LoginDialog;
 import com.alexosta.ostapjuks_pizzeriaRegister.view.RegisterDialog;
@@ -10,44 +12,65 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 public class MenuController {
     private ResizeAnimation resizeAnim;
+    private DBProduct dbProduct;
+    private IngredientBox ingredientBox;
+    private ProductBox productBox;
+
 
     @FXML
     private Button newOrderBtn, switchAccountBtn, newAccountBtn;
 
+
+
     @FXML
-    private ListView<String> productListView;
+    private TextField ingredientNameTextField, ingredientQuantityTextField;
+
+    @FXML
+    private Label ingredientAlaramLabel;
+
+    @FXML
+    VBox ingredientListVBox, productListVBox;
 
 
     @FXML
     private void initialize() {
         resizeAnim = new ResizeAnimation();
+        dbProduct = new DBProduct();
+        ingredientBox = new IngredientBox();
+        productBox = new ProductBox();
         setAllResizableBtnsInMenu();
-        updateListView();
+        updateIngredientsListView();
+        updateProductListView();
 
-        productListView.setCellFactory(param -> new ListCell<String>() {
-            @Override
-            protected void updateItem(String item, boolean empty) {
-                super.updateItem(item, empty);
+        updateProductListView();
+    }
 
-                if (!empty) {
-                    setText(item);
-                    setOnMouseClicked(event -> {
-                        int index = productListView.getItems().indexOf(item);
-                        System.out.println("Selected item index: "+ index);
-                    });
-                }
-            }
-        });
+    @FXML
+    private void deleteIngredientByName() {
+        String selectedIngredientName = ingredientBox.getSelectedIngredient();
+        dbProduct.deleteIngredientByName(selectedIngredientName);
+
+        updateIngredientsListView();
+    }
+
+    @FXML
+    private void deleteProductByName() {
+        String selectedProductName = productBox.getSelectedProduct();
+        System.out.println(selectedProductName);
+        dbProduct.deleteProductByName(selectedProductName);
+
+        updateProductListView();
     }
 
     @FXML
@@ -63,8 +86,16 @@ public class MenuController {
     }
 
     @FXML
-    private void updateListView() {
-        productListView.setItems(getDatabaseList());
+    private void addNewIngredient() {
+        try {
+            String name = ingredientNameTextField.getText();
+            int quantity = Integer.parseInt(ingredientQuantityTextField.getText());
+            dbProduct.writeIngredientToDatabase(name, quantity);
+            ingredientAlaramLabel.setText("");
+            updateIngredientsListView();
+        }catch (NumberFormatException ex) {
+            ingredientAlaramLabel.setText("* enter correct data!");
+        }
     }
 
     @FXML
@@ -74,10 +105,39 @@ public class MenuController {
     }
 
     @FXML
+    private void updateProductListView() {
+        productListVBox.getChildren().clear();
+        List<String> categoryList = dbProduct.getCategoryList();
+        List<String> productList = dbProduct.getProductList();
+        List<Double> priceList = dbProduct.getPriceList();
+        List<Integer> minList = dbProduct.getMinList();
+
+        dbProduct.updateProductFromDatabase();
+
+        for (int i = 0; i < categoryList.size(); i++) {
+            HBox hBox = productBox.createBox(categoryList.get(i), productList.get(i), priceList.get(i), minList.get(i));
+            productListVBox.getChildren().add(hBox);
+        }
+    }
+
+    @FXML
+    private void updateIngredientsListView() {
+        ingredientListVBox.getChildren().clear();
+        List<String> ingredient = DBProduct.getIngredientsFromDatabase();
+        List<Integer> quantity = DBProduct.getIngredientQuantityFromDatabase();
+
+        for (int i = 0; i < ingredient.size(); i++) {
+            HBox hBox = ingredientBox.createBox(ingredient.get(i), quantity.get(i));
+            ingredientListVBox.getChildren().add(hBox);
+        }
+
+
+    }
+
+    @FXML
     private void switchAccount() {
         new LoginDialog().showLoginDialog(false);
     }
-
     @FXML
     private void createNewAccount() {
         new RegisterDialog().showRegisterDialog(false);
@@ -101,9 +161,4 @@ public class MenuController {
         resizeAnim.setButtonHoverHandlers(newAccountBtn);
     }
 
-    public static ObservableList<String> getDatabaseList() {
-        ObservableList<String> products = FXCollections.observableList(DBProduct.getProductsFromDatabase());
-        FXCollections.observableArrayList(products);
-        return products;
-    }
 }

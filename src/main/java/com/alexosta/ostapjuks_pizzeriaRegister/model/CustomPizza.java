@@ -86,13 +86,13 @@ public class CustomPizza {
     public void createCustomPizza() {
         NewOrderController newOrderController = NewOrderController.getInstance();
         newOrderController.initialize();
-        HBox container = newOrderController.getProductList_hBox();
+        HBox container = newOrderController.productHBox;
         fillBoxWithCustomPizzaData(container);
     }
 
     private void fillBoxWithCustomPizzaData(HBox container) {
         String line = formatInOneLine();
-        new ProductBox(container, "Custom Pizza", line, "custom_pizza/_dough.png", 100);
+        new ProductContainer(container, "Custom Pizza", line, "custom_pizza/_dough.png", 100);
     }
 
     private String formatInOneLine() {

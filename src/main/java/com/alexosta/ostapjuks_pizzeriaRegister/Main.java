@@ -13,8 +13,9 @@ public class Main extends Application {
 
         new LoginDialog().showLoginDialog(true);
 
-        MenuController MenuController = new MenuController();
-        stage = MenuController.getStageOfMenuScene();
+        MenuController menuController = new MenuController();
+        stage = menuController.getStageOfMenuScene();
+
 
         stage.show();
     }

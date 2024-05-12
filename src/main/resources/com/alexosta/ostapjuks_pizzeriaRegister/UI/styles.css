@@ -88,3 +88,11 @@
 .edit-pizza-btn:hover {
     -fx-opacity: 0.8;
 }
+
+.hBox-selectable:hover {
+    -fx-background-color: #43b551;
+}
+
+.hBox-selectable {
+    -fx-background-color: #d9d9d9;
+}
