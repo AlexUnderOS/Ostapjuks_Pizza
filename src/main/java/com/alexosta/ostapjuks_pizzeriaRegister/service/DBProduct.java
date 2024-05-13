@@ -6,6 +6,7 @@ import java.sql.*;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class DBProduct {
 
@@ -73,35 +74,86 @@ public class DBProduct {
     }
 
 
-    public void showProductInfo(int index) {
-        try (Connection con = DriverManager.getConnection(url, user, password);
-             Statement stmt = con.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT category, price, img, name, ingredient_list, minutes FROM product")) {
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static List<String> getIngredientsFromDatabase() {
-        List<String> ingredients = new ArrayList<>();
-        String sql = "SELECT ingredient FROM ingredient_quantity";
-
+    ///////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////
+    private static List<Object> getProductsFromDatabase(String sql, String columnName) {
+        List<Object> result = new ArrayList<>();
         try (Connection con = DriverManager.getConnection(url, user, password);
              PreparedStatement stmt = con.prepareStatement(sql)) {
 
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                String ingredient = rs.getString("ingredient");
-                ingredients.add(ingredient);
+                Object value = rs.getObject(columnName);
+                result.add(value);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return ingredients;
+        return result;
     }
 
+    public static List<String> getProductCategoryFromDatabase() {
+        return getProductsFromDatabase("SELECT category FROM dish", "category")
+                .stream()
+                .map(String.class::cast)
+                .collect(Collectors.toList());
+    }
+
+    public static List<String> getProductNameFromDatabase() {
+        return getProductsFromDatabase("SELECT name FROM dish", "name")
+                .stream()
+                .map(String.class::cast)
+                .collect(Collectors.toList());
+    }
+
+    public static List<Double> getProductPriceFromDatabase() {
+        return getProductsFromDatabase("SELECT price FROM dish", "price")
+                .stream()
+                .map(Double.class::cast)
+                .collect(Collectors.toList());
+    }
+
+    public static List<Integer> getProductMinutesFromDatabase() {
+        return getProductsFromDatabase("SELECT minutes FROM dish", "minutes")
+                .stream()
+                .map(Integer.class::cast)
+                .collect(Collectors.toList());
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////
+    public static List<Object> getIngredientsFromDatabase(String sql, String columnName) {
+        List<Object> result = new ArrayList<>();
+        try (Connection con = DriverManager.getConnection(url, user, password);
+             PreparedStatement stmt = con.prepareStatement(sql)) {
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Object value = rs.getObject(columnName);
+                result.add(value);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public static List<String> getIngredientsFromDatabase() {
+        return getIngredientsFromDatabase("SELECT ingredient FROM ingredient_quantity", "ingredient")
+                .stream()
+                .map(String.class::cast)
+                .collect(Collectors.toList());
+    }
+
+    public static List<Long> getIngredientQuantityFromDatabase() {
+        return getIngredientsFromDatabase("SELECT quantity FROM ingredient_quantity", "quantity")
+                .stream()
+                .map(Long.class::cast)
+                .collect(Collectors.toList());
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////
     public void deleteIngredientByName(String ingredientName) {
         String query = "DELETE FROM ingredient_quantity WHERE ingredient =?";
 
@@ -120,31 +172,13 @@ public class DBProduct {
 
         try (Connection con = DriverManager.getConnection(url, user, password);
              PreparedStatement pst = con.prepareStatement(query)) {
-            pst.setString(4, name);
+            pst.setString(1, name);
             pst.executeUpdate();
+
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(getClass().getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
-    }
-
-    public static List<Integer> getIngredientQuantityFromDatabase() {
-        List<Integer> quantities = new ArrayList<>();
-        String sql = "SELECT quantity FROM ingredient_quantity";
-
-        try (Connection con = DriverManager.getConnection(url, user, password);
-             PreparedStatement stmt = con.prepareStatement(sql)) {
-
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                int quantity = rs.getInt("quantity");
-                quantities.add(quantity);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return quantities;
     }
 
     public static void updateIngredientQuantityInDatabase(String ingredient, int newQuantity) {
@@ -162,53 +196,4 @@ public class DBProduct {
         }
     }
 
-    private List<String> categoryList = new ArrayList<>();
-    private List<String> productList = new ArrayList<>();
-    private List<Double> priceList = new ArrayList<>();
-    private List<Integer> minList = new ArrayList<>();
-    private List<String> imgList = new ArrayList<>();
-    private List<String> ingredientList = new ArrayList<>();
-
-
-    public void updateProductFromDatabase() {
-        try (Connection con = DriverManager.getConnection(url, user, password);
-             Statement stmt = con.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT category, price, img, name, ingredient_list, minutes FROM dish")) {
-
-            while (rs.next()) {
-                String category = rs.getString("category");
-                String product = rs.getString("name");
-                double price = rs.getDouble("price");
-                int min = rs.getInt("minutes");
-                categoryList.add(category);
-                productList.add(product);
-                priceList.add(price);
-                minList.add(min);
-
-
-//                String img = rs.getString("img");
-//                String ingredient_list = rs.getString("ingredient_list");
-//                imgList.add(img);
-//                ingredientList.add(ingredient_list);
-            }
-        } catch (Exception e) {
-            System.err.println("Error fetching data from database: " + e.getMessage());
-        }
-    }
-
-    public List<String> getCategoryList() {
-        return categoryList;
-    }
-
-    public List<String> getProductList() {
-        return productList;
-    }
-
-    public List<Double> getPriceList() {
-        return priceList;
-    }
-
-    public List<Integer> getMinList() {
-        return minList;
-    }
 }

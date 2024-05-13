@@ -33,6 +33,7 @@ public class ProductBox {
         radioButton.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 selectedProduct = product;
+                System.out.println(selectedProduct);
             }
         });
 

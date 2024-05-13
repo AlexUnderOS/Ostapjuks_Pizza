@@ -30,7 +30,6 @@ public class CustomPizzaController {
     private void initialize() {
         instance = this;
         CustomPizza jsonHandler = new CustomPizza();
-        jsonHandler.fillListViewWithJSONData(productListVBox, "custom-pizza", imageContainerAnchorPane);
     }
 
     public void showCustomPizzaScene() throws IOException {

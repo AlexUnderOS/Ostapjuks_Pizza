@@ -17,6 +17,7 @@ public class NewOrderController {
 
     private static NewOrderController instance;
 
+
     @FXML
     public ListView<String> listOfProducts;
 
@@ -40,11 +41,20 @@ public class NewOrderController {
         initialize();
     }
 
+    @FXML
+    private void backToMenu() throws IOException {
+        Stage currentStage = (Stage) productHBox.getScene().getWindow();
+        currentStage.close();
+
+        Stage newStage = new MenuController().getStageOfMenuScene();
+
+        newStage.show();
+    }
+
     public void callCustomPizzaScene() throws IOException {
         CustomPizzaController controller = new CustomPizzaController();
         controller.showCustomPizzaScene();
     }
-
     public Stage createNewOrderScene() throws IOException {
         Stage newStage = new Stage();
 

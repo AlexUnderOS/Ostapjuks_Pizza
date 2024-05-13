@@ -53,7 +53,6 @@ public class MenuController {
         updateIngredientsListView();
         updateProductListView();
 
-        updateProductListView();
     }
 
     @FXML
@@ -71,6 +70,7 @@ public class MenuController {
         dbProduct.deleteProductByName(selectedProductName);
 
         updateProductListView();
+
     }
 
     @FXML
@@ -107,30 +107,28 @@ public class MenuController {
     @FXML
     private void updateProductListView() {
         productListVBox.getChildren().clear();
-        List<String> categoryList = dbProduct.getCategoryList();
-        List<String> productList = dbProduct.getProductList();
-        List<Double> priceList = dbProduct.getPriceList();
-        List<Integer> minList = dbProduct.getMinList();
-
-        dbProduct.updateProductFromDatabase();
+        List<String> categoryList = DBProduct.getProductCategoryFromDatabase();
+        List<String> productList = DBProduct.getProductNameFromDatabase();
+        List<Double> priceList = DBProduct.getProductPriceFromDatabase();
+        List<Integer> minList = DBProduct.getProductMinutesFromDatabase();
 
         for (int i = 0; i < categoryList.size(); i++) {
             HBox hBox = productBox.createBox(categoryList.get(i), productList.get(i), priceList.get(i), minList.get(i));
             productListVBox.getChildren().add(hBox);
         }
+
     }
 
     @FXML
     private void updateIngredientsListView() {
         ingredientListVBox.getChildren().clear();
         List<String> ingredient = DBProduct.getIngredientsFromDatabase();
-        List<Integer> quantity = DBProduct.getIngredientQuantityFromDatabase();
+        List<Long> quantity = DBProduct.getIngredientQuantityFromDatabase();
 
         for (int i = 0; i < ingredient.size(); i++) {
-            HBox hBox = ingredientBox.createBox(ingredient.get(i), quantity.get(i));
+            HBox hBox = ingredientBox.createBox(ingredient.get(i), Math.toIntExact(quantity.get(i)));
             ingredientListVBox.getChildren().add(hBox);
         }
-
 
     }
 
