@@ -12,14 +12,15 @@ public class DBWorkers {
     private static final String user = "postgres";
     private static final String password = "Parole01!";
 
-    public static void writeToDatabase(String userName, String userPassword) {
+    public static void writeToDatabase(String userName, String userPassword, boolean isAdmin) {
 
-        String query = "INSERT INTO worker(name, password) VALUES(?, ?)";
+        String query = "INSERT INTO worker(name, password, admin) VALUES(?, ?, ?)";
 
         try (Connection con = DriverManager.getConnection(url, user, password);
              PreparedStatement pst = con.prepareStatement(query)) {
             pst.setString(1, userName);
             pst.setString(2, userPassword);
+            pst.setBoolean(3, isAdmin);
             pst.executeUpdate();
 
         }catch (SQLException ex) {
@@ -27,28 +28,6 @@ public class DBWorkers {
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
 
-    }
-
-    public static List<String> readFromDatabase(String colName) {
-
-        List<String> colList = new ArrayList<>();
-
-        String query = STR."SELECT \{colName} FROM worker";
-
-        try (Connection con = DriverManager.getConnection(url, user, password);
-             Statement stmt = con.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
-
-            while (rs.next()) {
-                colList.add(rs.getString(colName));
-            }
-
-        } catch (SQLException ex) {
-            Logger lgr = Logger.getLogger(DBWorkers.class.getName());
-            lgr.log(Level.SEVERE, ex.getMessage(), ex);
-        }
-
-        return colList;
     }
 
     public static boolean checkNameExists(String userName) {
@@ -78,6 +57,25 @@ public class DBWorkers {
 
             return rs.next();
 
+        } catch (SQLException ex) {
+            Logger lgr = Logger.getLogger(DBWorkers.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+            return false;
+        }
+    }
+
+    public static boolean checkAdminStatus(String userName) {
+        String query = "SELECT admin FROM worker WHERE name =?";
+        boolean isAdmin = false;
+        try (Connection con = DriverManager.getConnection(url, user, password);
+             PreparedStatement pst = con.prepareStatement(query)) {
+            pst.setString(1, userName);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                isAdmin = rs.getBoolean("admin");
+            }
+            return isAdmin;
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(DBWorkers.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);

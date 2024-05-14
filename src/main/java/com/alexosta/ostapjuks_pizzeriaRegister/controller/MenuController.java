@@ -26,12 +26,14 @@ public class MenuController {
     private DBProduct dbProduct;
     private IngredientBox ingredientBox;
     private ProductBox productBox;
+    private LoginDialog dialog;
+    private static final RegisterDialog registerDialog = new RegisterDialog();
+
+
 
 
     @FXML
     private Button newOrderBtn, switchAccountBtn, newAccountBtn;
-
-
 
     @FXML
     private TextField ingredientNameTextField, ingredientQuantityTextField;
@@ -40,7 +42,13 @@ public class MenuController {
     private Label ingredientAlaramLabel;
 
     @FXML
-    VBox ingredientListVBox, productListVBox;
+    private VBox ingredientListVBox, productListVBox;
+
+    @FXML
+    private Label priorityLabel;
+
+    @FXML
+    private Tab ingredientsTab, productsTab;
 
 
     @FXML
@@ -49,6 +57,17 @@ public class MenuController {
         dbProduct = new DBProduct();
         ingredientBox = new IngredientBox();
         productBox = new ProductBox();
+        dialog = Main.getDialog();
+        boolean isAdmin = dialog.getLoginPriority();
+        if (isAdmin) {
+            System.out.println("Cool!");
+            setAdminPrioritySettings();
+        }else {
+            System.out.println("Bad!");
+            setUserPrioritySettings();
+        }
+
+
         setAllResizableBtnsInMenu();
         updateIngredientsListView();
         updateProductListView();
@@ -134,11 +153,17 @@ public class MenuController {
 
     @FXML
     private void switchAccount() {
-        new LoginDialog().showLoginDialog(false);
+        dialog.showLoginDialog(false);
+        if (dialog.getLoginPriority()) {
+            setAdminPrioritySettings();
+        } else {
+            setUserPrioritySettings();
+        }
+
     }
     @FXML
     private void createNewAccount() {
-        new RegisterDialog().showRegisterDialog(false);
+        registerDialog.showRegisterDialog(false);
     }
 
     public Stage getStageOfMenuScene() throws IOException {
@@ -153,6 +178,19 @@ public class MenuController {
         newStage.setScene(scene);
         return newStage;
     }
+
+    private void setAdminPrioritySettings() {
+        priorityLabel.setText("Priority: ADMIN");
+        ingredientsTab.setDisable(false);
+        productsTab.setDisable(false);
+    }
+
+    private void setUserPrioritySettings() {
+        priorityLabel.setText("Priority: USER");
+        ingredientsTab.setDisable(true);
+        productsTab.setDisable(true);
+    }
+
     private void setAllResizableBtnsInMenu() {
         resizeAnim.setButtonHoverHandlers(newOrderBtn);
         resizeAnim.setButtonHoverHandlers(switchAccountBtn);

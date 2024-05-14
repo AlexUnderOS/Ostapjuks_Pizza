@@ -8,19 +8,22 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Main extends Application {
+    private static final LoginDialog dialog = new LoginDialog();
     @Override
     public void start(Stage stage) throws IOException {
-
-        new LoginDialog().showLoginDialog(true);
+        dialog.showLoginDialog(true);
 
         MenuController menuController = new MenuController();
         stage = menuController.getStageOfMenuScene();
-
 
         stage.show();
     }
 
     public static void main(String[] args) {
         launch();
+    }
+
+    public static LoginDialog getDialog() {
+        return dialog;
     }
 }

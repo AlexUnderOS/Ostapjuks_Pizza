@@ -1,7 +1,9 @@
 package com.alexosta.ostapjuks_pizzeriaRegister.view;
 
 import com.alexosta.ostapjuks_pizzeriaRegister.Main;
+import com.alexosta.ostapjuks_pizzeriaRegister.controller.MenuController;
 import com.alexosta.ostapjuks_pizzeriaRegister.service.DBWorkers;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,12 +19,15 @@ public class LoginDialog {
     private TextField usernameField;
     private PasswordField passwordField;
     private Button okButton;
-    private boolean dbPassChecked, dbUserChecked;
-    private final Stage primaryStage = new Stage();
+    private boolean dbPassChecked, dbUserChecked, dbIsAdminChecker;
+    private Stage primaryStage;
 
     public LoginDialog() {
-        initializeFields();
-        initializeOkButton();
+        Platform.runLater(() -> {
+            primaryStage = new Stage();
+            initializeFields();
+            initializeOkButton();
+        });
     }
 
     private void initializeFields() {
@@ -59,7 +64,13 @@ public class LoginDialog {
         primaryStage.setScene(scene);
 
         if (closeEvent) {
-            primaryStage.setOnCloseRequest(event -> System.exit(0));
+            primaryStage.setOnCloseRequest(event -> {
+                Platform.exit();
+            });
+        } else {
+            primaryStage.setOnCloseRequest(event -> {
+                primaryStage.close();
+            });
         }
         primaryStage.showAndWait();
     }
@@ -69,5 +80,11 @@ public class LoginDialog {
         System.out.println(password);
         dbUserChecked = DBWorkers.checkNameExists(username);
         dbPassChecked = DBWorkers.checkPassExists(password);
+        dbIsAdminChecker = DBWorkers.checkAdminStatus(username);
     }
+
+    public boolean getLoginPriority() {
+        return dbIsAdminChecker;
+    }
+
 }

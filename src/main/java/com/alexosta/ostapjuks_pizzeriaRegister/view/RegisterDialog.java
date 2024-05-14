@@ -74,6 +74,10 @@ public class RegisterDialog {
     public void getData(String username, String password) {
         System.out.println(username);
         System.out.println(password);
-        DBWorkers.writeToDatabase(username, password);
+        DBWorkers.writeToDatabase(username, password, false);
+    }
+
+    public Stage getPrimaryStage() {
+        return primaryStage;
     }
 }
