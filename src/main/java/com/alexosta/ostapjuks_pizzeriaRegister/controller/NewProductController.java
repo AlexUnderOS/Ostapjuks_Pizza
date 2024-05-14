@@ -60,20 +60,20 @@ public class NewProductController {
     private void searchImage() {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(newStage);
-        if (file!= null) {
+        if (file != null) {
             try {
-                String resourcesPath = "src/main/resources/com/alexosta/ostapjuks_pizzeriaRegister/UI/imgs/product_images";
+                String resourcesPath = "src/main/resources/com/alexosta/ostapjuks_pizzeriaRegister/UI/imgs/product_images/";
                 Path destinationPath = Paths.get(resourcesPath);
                 Path sourcePath = file.toPath();
                 Path targetPath = destinationPath.resolve(file.getName());
 
                 if (Files.exists(targetPath)) {
-                    System.out.println("File is exist!");
+                    System.out.println("File already exists!");
                 } else {
                     Files.copy(sourcePath, targetPath);
-                    System.out.println("File successfully was copied!");
+                    System.out.println("File successfully copied!");
                 }
-                imageLink = targetPath.toString();
+                imageLink = targetPath.toUri().toString();
 
             } catch (Exception ex) {
                 ex.printStackTrace();

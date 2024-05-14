@@ -1,6 +1,5 @@
 package com.alexosta.ostapjuks_pizzeriaRegister.model;
 
-import com.alexosta.ostapjuks_pizzeriaRegister.domain.Product;
 import com.jfoenix.controls.JFXRadioButton;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -12,30 +11,31 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 
-import java.net.URL;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductContainer {
-    private String title;
-    private String description;
+    private String category;
+    private double price;
     private String imageUrl;
-    private int quantityInStock;
+    private String productName;
+    private String ingredients;
+    private int minutes;
+    private String size;
 
-    private List<Product> productList = new LinkedList<>();
+    List<String> selectedProducts = new ArrayList<>();
 
-    public ProductContainer(HBox container, String title, String description, String imageUrl, int quantityInStock) {
-        this.title = title;
-        this.description = description;
-        this.quantityInStock = quantityInStock;
-        System.out.println("Attempting to load resource: UI/imgs/" + imageUrl);
-        URL resourceUrl = getClass().getResource("UI/imgs/" + imageUrl);
-        if (resourceUrl == null) {
-            System.out.println("Resource not found: UI/imgs/" + imageUrl);
-        } else {
-            this.imageUrl = resourceUrl.toExternalForm();
-        }
-        container.getChildren().add(createProductContainer());
+    public VBox setProductContainer(String category, double price, String imageUrl,
+                                       String productName, String ingredients, int minutes, String size) {
+        this.category = category;
+        this.price = price;
+        this.imageUrl = imageUrl;
+        this.productName = productName;
+        this.ingredients = ingredients;
+        this.minutes = minutes;
+        this.size = size;
+
+        return createProductContainer();
     }
 
     private VBox createProductContainer() {
@@ -44,6 +44,9 @@ public class ProductContainer {
         vbox.setPrefWidth(192.0);
         vbox.setSpacing(5.0);
         vbox.getStyleClass().add("pepper-types-vbox");
+
+        Label categoryLabel = createCategoryLabel();
+        vbox.getChildren().add(categoryLabel);
 
         ImageView imageView = createProductImageView();
         vbox.getChildren().add(imageView);
@@ -54,26 +57,52 @@ public class ProductContainer {
         HBox sizeSelectionHBox = createSizeSelectionHBox();
         vbox.getChildren().add(sizeSelectionHBox);
 
+        Label minutesLabel = createMinutesLabel();
+        vbox.getChildren().add(minutesLabel);
+
+        Label priceLabel = createPriceLabel();
+        vbox.getChildren().add(priceLabel);
+
         TextField descriptionTextField = createDescriptionTextField();
         vbox.getChildren().add(descriptionTextField);
 
-        Spinner<Integer> inStockSpinner = createInStockSpinner();
-        vbox.getChildren().add(inStockSpinner);
-
         Label amountInStock = createAmountInStockLabel();
         vbox.getChildren().add(amountInStock);
+
+        Spinner<Integer> inStockSpinner = createInStockSpinner();
+        vbox.getChildren().add(inStockSpinner);
 
         vbox.setPadding(new Insets(10.0, 10.0, 10.0, 10.0));
 
         return vbox;
     }
 
+    private Label createCategoryLabel() {
+        Label minutesLabel = new Label();
+        minutesLabel.setText(category.toUpperCase());
+        minutesLabel.setFont(new Font("Comic Sans MS", 20.0));
+        return minutesLabel;
+    }
 
     private Label createAmountInStockLabel() {
         Label amountInStockLabel = new Label();
-        amountInStockLabel.setText("In stock: "+(quantityInStock));
+        amountInStockLabel.setText("How much:");
         amountInStockLabel.setFont(new Font("Comic Sans MS", 17.0));
         return amountInStockLabel;
+    }
+
+    private Label createMinutesLabel() {
+        Label minutesLabel = new Label();
+        minutesLabel.setText("Minutes: " + minutes);
+        minutesLabel.setFont(new Font("Comic Sans MS", 17.0));
+        return minutesLabel;
+    }
+
+    private Label createPriceLabel() {
+        Label minutesLabel = new Label();
+        minutesLabel.setText("Price: " + price);
+        minutesLabel.setFont(new Font("Comic Sans MS", 17.0));
+        return minutesLabel;
     }
 
     private ImageView createProductImageView() {
@@ -82,6 +111,7 @@ public class ProductContainer {
         pizzaImageView.setFitWidth(200.0);
         pizzaImageView.setPickOnBounds(true);
         pizzaImageView.setPreserveRatio(true);
+        System.out.println(imageUrl);
         Image image = new Image(imageUrl);
         pizzaImageView.setImage(image);
         return pizzaImageView;
@@ -94,7 +124,7 @@ public class ProductContainer {
         titleHBox.setPrefWidth(194.0);
         titleHBox.setSpacing(20.0);
 
-        Label pizzaTitleLabel = new Label(title);
+        Label pizzaTitleLabel = new Label(productName);
         pizzaTitleLabel.setTextAlignment(TextAlignment.CENTER);
         pizzaTitleLabel.setFont(new Font("Comic Sans MS", 17.0));
         titleHBox.getChildren().add(pizzaTitleLabel);
@@ -117,7 +147,14 @@ public class ProductContainer {
 
         sizeSelectionHBox.getChildren().addAll(sizeSRadioButton, sizeMRadioButton, sizeLRadioButton);
 
-
+        pizzaSizeToggleGroup.selectedToggleProperty().addListener((observable, oldToggle, newToggle) -> {
+            if (newToggle != null) {
+                RadioButton selectedRadioButton = (RadioButton) newToggle;
+                String selectedSize = selectedRadioButton.getText();
+                System.out.println("Selected size: " + selectedSize);
+                size = selectedSize;
+            }
+        });
 
         return sizeSelectionHBox;
     }
@@ -130,7 +167,7 @@ public class ProductContainer {
     }
 
     private TextField createDescriptionTextField() {
-        TextField descriptionTextField = new TextField(description);
+        TextField descriptionTextField = new TextField(ingredients);
         descriptionTextField.setAlignment(Pos.CENTER);
         descriptionTextField.setOpacity(0.35);
         descriptionTextField.getStyleClass().add("product-description");
@@ -141,12 +178,20 @@ public class ProductContainer {
 
     private Spinner<Integer> createInStockSpinner() {
         Spinner<Integer> inStockSpinner = new Spinner<>();
+
+        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 0);
+
+        inStockSpinner.setValueFactory(valueFactory);
+
+        inStockSpinner.setEditable(true);
         inStockSpinner.setPrefHeight(30.0);
         inStockSpinner.setPrefWidth(62.0);
         return inStockSpinner;
     }
 
-    public List<Product> getProductList() {
-        return productList;
+    public List<String> getSelectedProducts() {
+        return selectedProducts;
     }
+
 }
+

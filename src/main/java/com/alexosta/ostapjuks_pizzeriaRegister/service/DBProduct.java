@@ -120,6 +120,29 @@ public class DBProduct {
                 .collect(Collectors.toList());
     }
 
+    public static List<String> getProductIngredientListFromDatabase() {
+        return getProductsFromDatabase("SELECT ingredient_list FROM dish", "ingredient_list")
+                .stream()
+                .map(String.class::cast)
+                .collect(Collectors.toList());
+    }
+
+    public static List<String> getProductImageFromDatabase() {
+        return getProductsFromDatabase("SELECT img FROM dish", "img")
+                .stream()
+                .map(String.class::cast)
+                .collect(Collectors.toList());
+    }
+
+    public static List<String> getProductSizeFromDatabase() {
+        return getProductsFromDatabase("SELECT size FROM dish", "size")
+                .stream()
+                .map(String.class::cast)
+                .collect(Collectors.toList());
+    }
+
+
+
     ///////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////
     public static List<Object> getIngredientsFromDatabase(String sql, String columnName) {

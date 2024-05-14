@@ -36,12 +36,12 @@
                             <children>
                         <VBox prefHeight="460.0" prefWidth="736.8" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                                      <ScrollPane hbarPolicy="ALWAYS" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="412.0" prefWidth="730.0" vbarPolicy="NEVER">
+                                      <ScrollPane hbarPolicy="ALWAYS" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="409.0" prefWidth="730.0" vbarPolicy="NEVER" VBox.vgrow="ALWAYS">
                                           <padding>
                                               <Insets left="20.0" right="20.0" top="20.0" />
                                           </padding>
                                  <content>
-                                    <HBox fx:id="productHBox" prefHeight="323.0" prefWidth="690.0" />
+                                    <HBox fx:id="productHBox" prefWidth="690.0" />
                                  </content>
                                       </ScrollPane>
                               <HBox alignment="CENTER" prefHeight="60.0" prefWidth="727.0" spacing="5.0">

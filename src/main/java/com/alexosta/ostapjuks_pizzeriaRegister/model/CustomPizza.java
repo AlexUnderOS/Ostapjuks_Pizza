@@ -43,7 +43,7 @@ public class CustomPizza {
 
     private void fillBoxWithCustomPizzaData(HBox container) {
         String line = formatInOneLine();
-        new ProductContainer(container, "Custom Pizza", line, "custom_pizza/_dough.png", 100);
+//        new ProductContainer(container, "Custom Pizza", line, "custom_pizza/_dough.png", 100);
     }
 
     private String formatInOneLine() {
