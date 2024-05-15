@@ -66,7 +66,7 @@ public class RegisterDialog {
         primaryStage.setScene(scene);
 
         if (closeEvent) {
-            primaryStage.setOnCloseRequest(_ -> System.exit(0));
+            primaryStage.setOnCloseRequest(event -> System.exit(0));
         }
         primaryStage.showAndWait();
     }

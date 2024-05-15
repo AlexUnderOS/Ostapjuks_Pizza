@@ -42,14 +42,6 @@ public class ProductBox {
         innerHBox.setPrefWidth(50.0);
         innerHBox.setAlignment(Pos.CENTER_RIGHT);
 
-        Button editButton = new Button("edit");
-        editButton.setMinHeight(-1);
-        editButton.setMinWidth(-1);
-        editButton.setPrefHeight(30.0);
-        editButton.setPrefWidth(66.0);
-
-        innerHBox.getChildren().add(editButton);
-
         outerHBox.getChildren().addAll(categoryLabel, productLabel, priceLabel, radioButton, timeLabel, innerHBox);
 
         return  outerHBox;

@@ -29,7 +29,6 @@ public class CustomPizzaController {
     @FXML
     private void initialize() {
         instance = this;
-        CustomPizza jsonHandler = new CustomPizza();
     }
 
     public void showCustomPizzaScene() throws IOException {

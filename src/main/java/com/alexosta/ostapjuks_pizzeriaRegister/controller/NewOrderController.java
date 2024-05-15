@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -20,17 +22,33 @@ import java.util.Objects;
 public class NewOrderController {
 
     private static NewOrderController instance;
+    private ProductContainer container;
+
 
     @FXML
     public ListView<String> listOfProducts;
     @FXML
     public HBox productHBox;
 
+    @FXML
+    private Label selectedProductLabel, totalPriceLabel;
+
+    @FXML
+    private ImageView productImageView;
+
+    private String selectedItemFromProductList;
+
 
     @FXML
     public void initialize() {
+        container = new ProductContainer();
         instance = this;
         updateProductListInHBox();
+
+        listOfProducts.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            selectedItemFromProductList = newValue;
+            updateSelectedProductLabel(selectedItemFromProductList);
+        });
     }
 
     private void updateProductListInHBox() {
@@ -41,13 +59,12 @@ public class NewOrderController {
         List<Integer> minList = DBProduct.getProductMinutesFromDatabase();
         List<String> imgLink = DBProduct.getProductImageFromDatabase();
         List<String> ingredientList = DBProduct.getProductIngredientListFromDatabase();
-        List<String> sizeList = DBProduct.getProductSizeFromDatabase();
 
-        ProductContainer container = new ProductContainer();
+        container = new ProductContainer();
         for (int i = 0; i < categoryList.size(); i++) {
             VBox vBox = container.setProductContainer(
                     categoryList.get(i), priceList.get(i), imgLink.get(i),
-                    productList.get(i), ingredientList.get(i), minList.get(i), sizeList.get(i));
+                    productList.get(i), ingredientList.get(i), minList.get(i));
 
             productHBox.getChildren().add(vBox);
         }
@@ -55,13 +72,68 @@ public class NewOrderController {
 
     @FXML
     private void confirmOrderResultBtn() throws IOException {
-        System.out.println("We do something to confirm our order.");
-        new Receipts();
+        CardController controller = new CardController();
+        controller.showCardScene();
+        new Receipts(container);
     }
 
     @FXML
-    private void reloadPage() {
-        initialize();
+    private void onShowPayTab() {
+        updateListOfProducts();
+    }
+
+    private void updateListOfProducts() {
+        listOfProducts.getItems().clear();
+        List<String> items = container.getSelectedProducts();
+        double totalPrice = 0;
+
+        for (String item : items) {
+            List<String> productNames = DBProduct.getProductNameFromDatabase();
+            int index = productNames.indexOf(item);
+
+            if (index != -1) {
+                List<Double> prices = DBProduct.getProductPriceFromDatabase();
+                double price = prices.get(index);
+                totalPrice += price;
+            }
+        }
+        totalPriceLabel.setText("Total Price: " + totalPrice + " EURO");
+    }
+
+    private void updateSelectedProductLabel(String productName) {
+        double price = 0;
+        int min = 0;
+        String listOfIngredients = "";
+
+        List<String> productNames = DBProduct.getProductNameFromDatabase();
+        int index = productNames.indexOf(productName);
+
+        if (index != -1) {
+            List<Double> prices = DBProduct.getProductPriceFromDatabase();
+            List<Integer> minutes = DBProduct.getProductMinutesFromDatabase();
+            List<String> ingredients = DBProduct.getProductIngredientListFromDatabase();
+            List<String> imgs = DBProduct.getProductImageFromDatabase();
+
+            price = prices.get(index);
+            min = minutes.get(index);
+            listOfIngredients = ingredients.get(index);
+            String imgPath = imgs.get(index);
+
+            try {
+                Image image = new Image(imgPath);
+                productImageView.setImage(image);
+            }catch (NullPointerException ex) {
+                productImageView.setImage(null);
+            }
+        }
+
+        String result =
+                "Product: " + productName + "\n" +
+                "Price: " + price + " EURO\n" +
+                "Minutes: " + min + "\n" +
+                "Ingredients: " + listOfIngredients;
+        selectedProductLabel.setText(result);
+
     }
 
     @FXML
@@ -74,10 +146,10 @@ public class NewOrderController {
         newStage.show();
     }
 
-    public void callCustomPizzaScene() throws IOException {
-        CustomPizzaController controller = new CustomPizzaController();
-        controller.showCustomPizzaScene();
-    }
+//    public void callCustomPizzaScene() throws IOException {
+//        CustomPizzaController controller = new CustomPizzaController();
+//        controller.showCustomPizzaScene();
+//    }
     public Stage createNewOrderScene() throws IOException {
         Stage newStage = new Stage();
 
@@ -94,6 +166,8 @@ public class NewOrderController {
         });
         return newStage;
     }
+
+
 
     public static NewOrderController getInstance() {
         return instance;

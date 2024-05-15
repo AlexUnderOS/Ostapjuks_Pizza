@@ -134,15 +134,6 @@ public class DBProduct {
                 .collect(Collectors.toList());
     }
 
-    public static List<String> getProductSizeFromDatabase() {
-        return getProductsFromDatabase("SELECT size FROM dish", "size")
-                .stream()
-                .map(String.class::cast)
-                .collect(Collectors.toList());
-    }
-
-
-
     ///////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////
     public static List<Object> getIngredientsFromDatabase(String sql, String columnName) {

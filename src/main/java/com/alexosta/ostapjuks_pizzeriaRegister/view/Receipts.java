@@ -1,5 +1,9 @@
 package com.alexosta.ostapjuks_pizzeriaRegister.view;
 
+import com.alexosta.ostapjuks_pizzeriaRegister.model.ProductContainer;
+import com.alexosta.ostapjuks_pizzeriaRegister.service.DBProduct;
+import javafx.scene.layout.HBox;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -14,22 +18,27 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 public class Receipts {
+    private final ProductContainer productContainer;
 
-    public Receipts() throws IOException {
+    public Receipts(ProductContainer productContainer) throws IOException {
+        this.productContainer = productContainer;
         fillImageReceiptWithData();
     }
 
+    private String randomHash;
     private String getData() {
         Date date = new Date();
-        String productAndPrice = getProductAndPriceList();
-        String hashName = generateRandomHash(10);
-        double total = 10;
+        String productCart = getProductsFromCart();
+        System.out.println(productCart);
+        randomHash = generateRandomHash();
+        double total = getTotalPriceFromCart();
 
         String receipt = "ČILI PICA!\n" +
-                         "Product Nr.:" + hashName + "\n" +
-                         "Orders: " + productAndPrice + "\n" +
+                         "Product Nr.:" + randomHash + "\n" +
+                         "Orders: \n" + productCart + "\n" +
                          "______________________________" + "\n" +
                          "Data: " + date + "\n" +
                          "Total: " + total + "\n" +
@@ -39,29 +48,55 @@ public class Receipts {
         return receipt;
     }
 
-    private String getProductAndPriceList() {
+    private double getProductPriceByNameFromDB(String productName) {
 
-        return "sdasda";
+        List<String> productNames = DBProduct.getProductNameFromDatabase();
+
+        int index = productNames.indexOf(productName);
+
+        double price;
+        if (index != -1) {
+            List<Double> prices = DBProduct.getProductPriceFromDatabase();
+            price = prices.get(index);
+            return price;
+
+        } else {
+            return 0.0;
+        }
     }
 
-    public static String generateRandomHash(int length) {
-        StringBuilder hash = new StringBuilder();
-        try {
-            SecureRandom random = SecureRandom.getInstanceStrong();
-
-            byte[] randomBytes = new byte[length];
-            random.nextBytes(randomBytes);
-
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hashBytes = digest.digest(randomBytes);
-
-            for (byte b : hashBytes) {
-                hash.append(String.format("%02x", b));
-            }
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+    private String getProductsFromCart() {
+        List<String> selectedProducts = productContainer.getSelectedProducts();
+        String result = "";
+        for (int i = 0; i < selectedProducts.size(); i++) {
+            double price = getProductPriceByNameFromDB(selectedProducts.get(i));
+            result += selectedProducts.get(i) + " - "+ price +" euro\n";
+            System.out.println(result);
         }
-        return hash.toString();
+        return result;
+    }
+
+    private double getTotalPriceFromCart() {
+        List<String> selectedProducts = productContainer.getSelectedProducts();
+        double totalPrice = 0.0;
+        for (String productName : selectedProducts) {
+            double price = getProductPriceByNameFromDB(productName);
+            totalPrice += price;
+        }
+        return totalPrice;
+    }
+
+
+    private static String generateRandomHash() {
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        int length = 7;
+        StringBuilder sb = new StringBuilder(length);
+        Random random = new Random();
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(characters.length());
+            sb.append(characters.charAt(index));
+        }
+        return sb.toString();
     }
 
     private void fillImageReceiptWithData() throws IOException {
@@ -89,7 +124,7 @@ public class Receipts {
 
             g.dispose();
 
-            ImageIO.write(image, "png", new File("test.png"));
+            ImageIO.write(image, "png", new File("RECEIPT_"+randomHash+".png"));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
