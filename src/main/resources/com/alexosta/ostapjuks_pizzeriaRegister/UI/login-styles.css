@@ -1,0 +1,11 @@
+.root {
+    -fx-padding: 60px;
+    -fx-spacing: 4px;
+    -fx-background-color: #c4761b;
+}
+
+.button {
+    -fx-background-color: green;
+    -fx-text-fill: white;
+    -fx-pref-width: 200px;
+}
