@@ -10,11 +10,20 @@
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="361.0" prefWidth="512.0" spacing="10.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.alexosta.ostapjuks_pizzeriaRegister.controller.CardController">
    <children>
-      <Label fx:id="balanceLabel" text="100 euro" textFill="#00a800">
-         <font>
-            <Font name="Times New Roman Bold" size="30.0" />
-         </font>
-      </Label>
+      <HBox alignment="CENTER" prefHeight="0.0" prefWidth="512.0" spacing="10.0">
+         <children>
+            <Label fx:id="balanceLabel" text="100 euro" textFill="#00a800">
+               <font>
+                  <Font name="Times New Roman Bold" size="30.0" />
+               </font>
+            </Label>
+            <Button mnemonicParsing="false" onAction="#clickToAddMoney" prefHeight="8.0" prefWidth="20.0" style="-fx-background-color: #00a800; -fx-background-radius: 7;" text="+" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
       <TextField fx:id="numberTextField" alignment="CENTER" editable="false" prefHeight="38.0" prefWidth="238.0" text="3758751305">
          <VBox.margin>
             <Insets left="150.0" right="150.0" />
@@ -30,20 +39,11 @@
                   <Font name="System Bold" size="22.0" />
                </font>
             </Label>
-            <HBox alignment="CENTER" prefHeight="43.0" prefWidth="512.0" spacing="5.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#confirmTransfer" prefHeight="31.0" prefWidth="101.0" text="confirm">
-                     <font>
-                        <Font name="Times New Roman" size="17.0" />
-                     </font>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#cancelTransfer" prefHeight="31.0" prefWidth="81.0" text="cancel">
-                     <font>
-                        <Font name="Times New Roman" size="17.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
+            <Button mnemonicParsing="false" onAction="#confirmTransfer" prefHeight="31.0" prefWidth="138.0" text="confirm transfer">
+               <font>
+                  <Font name="Times New Roman" size="17.0" />
+               </font>
+            </Button>
          </children>
       </VBox>
    </children>

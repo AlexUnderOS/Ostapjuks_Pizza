@@ -4,9 +4,7 @@ import com.alexosta.ostapjuks_pizzeriaRegister.Main;
 import com.alexosta.ostapjuks_pizzeriaRegister.service.DBProduct;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -14,16 +12,10 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URL;
-import java.nio.file.FileSystemException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Objects;
-import java.util.ResourceBundle;
-import java.util.Scanner;
 
 public class NewProductController {
 
@@ -40,11 +32,9 @@ public class NewProductController {
     private static final Stage newStage = new Stage();
 
 
-    private String category, productName, imageLink, ingredientList;
-    private int minutes;
-    private double price;
+    private String imageLink;
 
-    private FileChooser fileChooser = new FileChooser();
+    private final FileChooser fileChooser = new FileChooser();
     public Stage getStageOfNewProductScene() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("new-product.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
@@ -88,11 +78,11 @@ public class NewProductController {
 
     private void updateData() {
         try {
-            category = categoryTextField.getText();
-            price = Double.parseDouble(priceTextField.getText());
-            productName = productNameTextField.getText();
-            ingredientList = ingredientListTextArea.getText();
-            minutes = Integer.parseInt(minutesTextField.getText());
+            String category = categoryTextField.getText();
+            double price = Double.parseDouble(priceTextField.getText());
+            String productName = productNameTextField.getText();
+            String ingredientList = ingredientListTextArea.getText();
+            int minutes = Integer.parseInt(minutesTextField.getText());
 
             DBProduct.writeToDatabase(category, price, imageLink, productName, ingredientList, minutes);
             alarmLabel.setText("");

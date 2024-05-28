@@ -16,6 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import javax.smartcardio.Card;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.List;
@@ -26,6 +27,8 @@ public class NewOrderController {
 
     private static NewOrderController instance;
     private ProductContainer productContainer;
+    private CardController cardController;
+
 
     @FXML
     public ListView<String> listOfProducts;
@@ -43,12 +46,13 @@ public class NewOrderController {
     @FXML
     private Label identityNum;
 
-    private String selectedItemFromProductList;
-
-    private String cardNumber;
-
     @FXML
     CheckBox discountCardCheckBox;
+
+    private String selectedItemFromProductList;
+
+    double totalPrice;
+
 
     @FXML
     public void initialize() {
@@ -70,16 +74,31 @@ public class NewOrderController {
         return instance;
     }
 
-    private CardController cardController;
+
+    @FXML
+    private void confirmOrderResultBtn() {
+        String cardNumberTransfer = cardNumberTextField.getText();
+        String cardNumber = DBCard.getFirstCardNumber();
+        double balance = DBCard.getBalance(cardNumber);
+        double result = balance - totalPrice;
+        if (cardNumberTransfer.equals(cardNumber) && result >= 0) {
+            cardController.showTransferBlock();
+        }
+    }
 
     @FXML
     private void openCardEmulator() throws IOException {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("card-view.fxml"));
         Scene scene = new Scene(loader.load());
         cardController = loader.getController();
-        Stage stage = new Stage();
+        Stage stage = cardController.getStage();
         stage.setScene(scene);
         stage.show();
+    }
+
+    private void closeCardEmulator() {
+        Stage stage = cardController.getStage();
+        stage.close();
     }
 
     private void updateProductListInHBox() {
@@ -101,18 +120,18 @@ public class NewOrderController {
         }
     }
 
-    @FXML
-    private void confirmOrderResultBtn() {
-        String cardNumberTransfer = cardNumberTextField.getText();
-        cardNumber = DBCard.getFirstCardNumber();
-        if (cardNumberTransfer.equals(cardNumber)) {
-            cardController.showTransferBlock();
-        }
-    }
 
     public void buyOrder() throws IOException {
-        new Receipts(productContainer);
-        backToMenu();
+        double firstCardBalance = DBCard.getBalance(DBCard.getFirstCardNumber());
+        double result = firstCardBalance - totalPrice;
+        cardController.setBalanceLabel(result);
+
+        if (result >= 0) {
+            new Receipts(productContainer);
+            DBCard.setBalance(DBCard.getFirstCardNumber(), result);
+            backToMenu();
+            closeCardEmulator();
+        }
     }
 
     @FXML
@@ -122,7 +141,7 @@ public class NewOrderController {
 
     private void updateListOfProducts() {
         listOfProducts.getItems().clear();
-        double totalPrice = 0; // reset total price
+        totalPrice = 0; // reset total price
         List<String> items = productContainer.getSelectedProducts();
 
         if (items != null && !items.isEmpty()) {
@@ -210,6 +229,7 @@ public class NewOrderController {
 
         Stage newStage = new MenuController().getStageOfMenuScene();
         newStage.show();
+
     }
 
     public Stage createNewOrderScene() throws IOException {
@@ -227,9 +247,5 @@ public class NewOrderController {
             System.exit(0);
         });
         return newStage;
-    }
-
-    public String getCardNumber() {
-        return cardNumber;
     }
 }

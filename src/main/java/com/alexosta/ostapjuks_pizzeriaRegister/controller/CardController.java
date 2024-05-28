@@ -1,19 +1,19 @@
 package com.alexosta.ostapjuks_pizzeriaRegister.controller;
 
-import com.alexosta.ostapjuks_pizzeriaRegister.Main;
 import com.alexosta.ostapjuks_pizzeriaRegister.service.DBCard;
-import com.alexosta.ostapjuks_pizzeriaRegister.view.Receipts;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 public class CardController {
+
+    private NewOrderController newOrderController;
+    private final Stage stage = new Stage();
 
     @FXML
     private TextField numberTextField;
@@ -26,8 +26,6 @@ public class CardController {
 
     @FXML
     private VBox transferBlockVBox;
-
-    private NewOrderController newOrderController;
 
     @FXML
     private void initialize() {
@@ -43,23 +41,35 @@ public class CardController {
     private void confirmTransfer() throws IOException {
         reloadCardStatus();
         newOrderController.buyOrder();
+
     }
 
     @FXML
-    private void cancelTransfer() {
-
+    private void clickToAddMoney() {
+        double currentBalance = DBCard.getBalance(DBCard.getFirstCardNumber()) + 10;
+        DBCard.setBalance(DBCard.getFirstCardNumber(), currentBalance);
+        reloadCardStatus();
     }
 
     private void reloadCardStatus() {
         String firstCardNumber = DBCard.getFirstCardNumber();
         System.out.println(firstCardNumber);
         double cardBalance = DBCard.getBalance(firstCardNumber);
+        setBalanceLabel(cardBalance);
 
-        balanceLabel.setText(String.valueOf(cardBalance));
         numberTextField.setText(firstCardNumber);
     }
 
     public void showTransferBlock() {
         transferBlockVBox.setVisible(true);
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public void setBalanceLabel(double balance) {
+        String convertedBalanceText = new DecimalFormat("#00.00").format(balance);
+        balanceLabel.setText(convertedBalanceText + " EURO");
     }
 }

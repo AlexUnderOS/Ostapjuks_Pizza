@@ -48,7 +48,6 @@ public class DBProduct {
                 } catch (SQLException ex) {
                     Logger lgr = Logger.getLogger(DBProduct.class.getName());
                     lgr.log(Level.SEVERE, "error in inserting into splitted_ingredients: " + ex.getMessage(), ex);
-
                 }
             }
         }catch (SQLException ex) {

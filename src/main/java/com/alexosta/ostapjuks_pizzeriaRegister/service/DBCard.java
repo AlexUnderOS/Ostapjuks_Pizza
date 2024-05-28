@@ -50,6 +50,21 @@ public class DBCard {
         return 0;
     }
 
+    public static void setBalance(String cardNumber, double newBalance) {
+        String query = "UPDATE card SET balance = ? WHERE number = ?";
+        try (Connection con = DriverManager.getConnection(url, user, password);
+             PreparedStatement pst = con.prepareStatement(query)) {
+            pst.setDouble(1, newBalance);
+            pst.setString(2, cardNumber);
+            int rowsAffected = pst.executeUpdate();  // Важно: выполняем обновление
+            if (rowsAffected == 0) {
+                System.out.println("No rows updated, check if the card number is correct.");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public static String getFirstCardNumber() {
         String query = "SELECT number FROM card LIMIT 1";
         try (Connection con = DriverManager.getConnection(url, user, password);

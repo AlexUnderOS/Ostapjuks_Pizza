@@ -130,13 +130,6 @@ public class ProductContainer {
         return titleHBox;
     }
 
-    private RadioButton createSizeRadioButton(String size, ToggleGroup toggleGroup) {
-        JFXRadioButton radioButton = new JFXRadioButton(size);
-        radioButton.setFont(new Font(12.0));
-        radioButton.setToggleGroup(toggleGroup);
-        return radioButton;
-    }
-
     private TextField createDescriptionTextField() {
         TextField descriptionTextField = new TextField(ingredients);
         descriptionTextField.setAlignment(Pos.CENTER);
@@ -187,9 +180,10 @@ public class ProductContainer {
         List<Pair<String, Pair<Integer, Integer>>> ingredientQuantities = new ArrayList<>();
 
         try (Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/products", "postgres", "Parole01!")) {
-            String query = "SELECT ingredient_quantity.ingredient, " +
-                    "       COALESCE(SUM(splitted_ingredients.quantity), 0) AS required_quantity, " +
-                    "       COALESCE(SUM(ingredient_quantity.quantity), 0) AS available_quantity " +
+            String query =
+                    "SELECT ingredient_quantity.ingredient, " +
+                    "COALESCE(SUM(splitted_ingredients.quantity), 0) AS required_quantity, " +
+                    "COALESCE(SUM(ingredient_quantity.quantity), 0) AS available_quantity " +
                     "FROM splitted_ingredients " +
                     "LEFT JOIN ingredient_quantity ON splitted_ingredients.ingredient = ingredient_quantity.ingredient " +
                     "WHERE splitted_ingredients.dish_name = ? " +
