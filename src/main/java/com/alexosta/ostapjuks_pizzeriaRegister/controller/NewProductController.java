@@ -90,4 +90,6 @@ public class NewProductController {
             alarmLabel.setText("* enter correct data!");
         }
     }
+
+
 }

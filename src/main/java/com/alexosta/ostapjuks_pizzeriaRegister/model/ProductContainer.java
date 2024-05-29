@@ -1,5 +1,6 @@
 package com.alexosta.ostapjuks_pizzeriaRegister.model;
 
+import com.alexosta.ostapjuks_pizzeriaRegister.controller.NewProductController;
 import com.jfoenix.controls.JFXRadioButton;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,10 +12,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Pair;
+import javafx.util.StringConverter;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ProductContainer {
     private String category;
@@ -23,8 +27,6 @@ public class ProductContainer {
     private String productName;
     private String ingredients;
     private int minutes;
-
-    private final List<String> selectedProducts = new ArrayList<>();
 
     public VBox setProductContainer(String category, double price, String imageUrl,
                                        String productName, String ingredients, int minutes) {
@@ -140,6 +142,9 @@ public class ProductContainer {
         return descriptionTextField;
     }
 
+
+    private final List<String> selectedProducts = new ArrayList<>();
+
     private Spinner<Integer> createInStockSpinner(String productName) {
         Spinner<Integer> inStockSpinner = new Spinner<>();
 
@@ -182,12 +187,12 @@ public class ProductContainer {
         try (Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/products", "postgres", "Parole01!")) {
             String query =
                     "SELECT ingredient_quantity.ingredient, " +
-                    "COALESCE(SUM(splitted_ingredients.quantity), 0) AS required_quantity, " +
-                    "COALESCE(SUM(ingredient_quantity.quantity), 0) AS available_quantity " +
-                    "FROM splitted_ingredients " +
-                    "LEFT JOIN ingredient_quantity ON splitted_ingredients.ingredient = ingredient_quantity.ingredient " +
-                    "WHERE splitted_ingredients.dish_name = ? " +
-                    "GROUP BY ingredient_quantity.ingredient";
+                            "COALESCE(SUM(splitted_ingredients.quantity), 0) AS required_quantity, " +
+                            "COALESCE(SUM(ingredient_quantity.quantity), 0) AS available_quantity " +
+                            "FROM splitted_ingredients " +
+                            "LEFT JOIN ingredient_quantity ON splitted_ingredients.ingredient = ingredient_quantity.ingredient " +
+                            "WHERE splitted_ingredients.dish_name = ? " +
+                            "GROUP BY ingredient_quantity.ingredient";
 
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, productName);
@@ -215,6 +220,5 @@ public class ProductContainer {
     public List<String> getSelectedProducts() {
         return selectedProducts;
     }
-
 }
 

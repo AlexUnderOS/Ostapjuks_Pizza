@@ -16,7 +16,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import javax.smartcardio.Card;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.List;
@@ -28,6 +27,7 @@ public class NewOrderController {
     private static NewOrderController instance;
     private ProductContainer productContainer;
     private CardController cardController;
+
 
 
     @FXML
@@ -142,7 +142,7 @@ public class NewOrderController {
     private void updateListOfProducts() {
         listOfProducts.getItems().clear();
         totalPrice = 0; // reset total price
-        List<String> items = productContainer.getSelectedProducts();
+            List<String> items = productContainer.getSelectedProducts();
 
         if (items != null && !items.isEmpty()) {
             for (String item : items) {
