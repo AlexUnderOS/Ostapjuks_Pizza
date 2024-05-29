@@ -1,21 +1,12 @@
 package com.alexosta.ostapjuks_pizzeriaRegister.controller;
 
 import com.alexosta.ostapjuks_pizzeriaRegister.Main;
-<<<<<<< HEAD
-import com.alexosta.ostapjuks_pizzeriaRegister.animations.ResizeAnimation;
-=======
 import com.alexosta.ostapjuks_pizzeriaRegister.animation.ResizeAnimation;
->>>>>>> feat/receipts
 import com.alexosta.ostapjuks_pizzeriaRegister.model.IngredientBox;
 import com.alexosta.ostapjuks_pizzeriaRegister.model.ProductBox;
 import com.alexosta.ostapjuks_pizzeriaRegister.service.DBProduct;
 import com.alexosta.ostapjuks_pizzeriaRegister.view.LoginDialog;
 import com.alexosta.ostapjuks_pizzeriaRegister.view.RegisterDialog;
-<<<<<<< HEAD
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-=======
->>>>>>> feat/receipts
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

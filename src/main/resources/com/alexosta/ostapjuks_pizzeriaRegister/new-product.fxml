@@ -16,12 +16,12 @@
    <children>
       <VBox prefHeight="400.0" prefWidth="216.0" spacing="5.0" HBox.hgrow="ALWAYS">
          <children>
-            <TextField fx:id="categoryTextField" prefHeight="30.0" prefWidth="174.0" promptText="Category">
+            <TextField fx:id="categoryTextField" focusTraversable="false" prefHeight="30.0" prefWidth="174.0" promptText="Category">
                <font>
                   <Font name="Comic Sans MS" size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="productNameTextField" promptText="Product name">
+            <TextField fx:id="productNameTextField" focusTraversable="false" promptText="Product name">
                <font>
                   <Font name="Comic Sans MS" size="14.0" />
                </font>
@@ -31,21 +31,21 @@
                   <Font name="System Italic" size="14.0" />
                </font>
             </Text>
-            <TextArea fx:id="ingredientListTextArea" prefHeight="78.0" prefWidth="570.0" promptText="Ingredients" wrapText="true">
+            <TextArea fx:id="ingredientListTextArea" focusTraversable="false" prefHeight="78.0" prefWidth="570.0" promptText="Ingredients" wrapText="true">
                <font>
                   <Font name="Comic Sans MS" size="14.0" />
                </font>
             </TextArea>
             <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="570.0" spacing="5.0">
                <children>
-                  <TextField fx:id="priceTextField" prefHeight="31.0" prefWidth="311.0" promptText="Price per piece">
+                  <TextField fx:id="priceTextField" focusTraversable="false" prefHeight="31.0" prefWidth="311.0" promptText="Price per piece">
                      <font>
                         <Font name="Comic Sans MS" size="14.0" />
                      </font>
                   </TextField>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="EUR" />
                   <Pane prefHeight="31.0" prefWidth="40.0" />
-                  <TextField fx:id="minutesTextField" prefHeight="31.0" prefWidth="77.0" promptText="30">
+                  <TextField fx:id="minutesTextField" focusTraversable="false" prefHeight="31.0" prefWidth="77.0" promptText="30">
                      <font>
                         <Font name="Comic Sans MS" size="14.0" />
                      </font>
@@ -56,7 +56,7 @@
             <HBox alignment="CENTER_LEFT" prefWidth="570.0" spacing="15.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="image" />
-                  <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#searchImage" prefHeight="30.0" prefWidth="58.0" text="search" />
+                  <Button focusTraversable="false" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#searchImage" prefHeight="30.0" prefWidth="58.0" text="search" />
                   <ImageView fitHeight="33.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </HBox>

@@ -2,20 +2,12 @@ package com.alexosta.ostapjuks_pizzeriaRegister.view;
 
 import com.alexosta.ostapjuks_pizzeriaRegister.model.ProductContainer;
 import com.alexosta.ostapjuks_pizzeriaRegister.service.DBProduct;
-import javafx.scene.layout.HBox;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.io.FileWriter;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;

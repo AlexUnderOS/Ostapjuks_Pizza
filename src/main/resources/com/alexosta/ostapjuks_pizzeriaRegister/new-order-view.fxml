@@ -3,10 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import javafx.geometry.Insets?>
-<<<<<<< HEAD
-=======
 <?import javafx.scene.control.Button?>
->>>>>>> feat/receipts
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
@@ -89,58 +86,40 @@
                                     <bottom>
                                         <HBox prefHeight="67.0" prefWidth="717.0">
                                             <children>
-                                                <Label fx:id="totalPriceLabel" prefHeight="67.0" prefWidth="497.0" text="Total: 10.23 EUR">
+                                                <Label fx:id="totalPriceLabel" prefHeight="67.0" prefWidth="497.0" text="Total: ...">
                                                     <font>
                                                         <Font name="Comic Sans MS Bold" size="33.0" />
                                                     </font>
                                                 </Label>
-<<<<<<< HEAD
-=======
                                     <Label fx:id="identityNum" text="8910">
                                        <font>
                                           <Font name="System Bold" size="24.0" />
                                        </font>
                                     </Label>
->>>>>>> feat/receipts
                                             </children>
                                         </HBox>
                                     </bottom>
                                     <right>
-<<<<<<< HEAD
-                                        <VBox alignment="CENTER_LEFT" prefHeight="256.0" prefWidth="231.0" BorderPane.alignment="CENTER">
-=======
                                         <VBox alignment="CENTER_LEFT" prefHeight="256.0" prefWidth="231.0" spacing="5.0" BorderPane.alignment="CENTER">
->>>>>>> feat/receipts
                                             <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enter bank card number:">
                                        <font>
                                           <Font name="Comic Sans MS" size="14.0" />
                                        </font>
                                     </Text>
-<<<<<<< HEAD
-                                    <TextField fx:id="cardNumberTextField" editable="false" prefHeight="29.0" prefWidth="231.0">
-=======
                                     <TextField fx:id="cardNumberTextField" prefHeight="29.0" prefWidth="231.0">
->>>>>>> feat/receipts
                                        <font>
                                           <Font size="17.0" />
                                        </font>
                                     </TextField>
-<<<<<<< HEAD
-=======
                                     <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openCardEmulator" prefHeight="26.0" style="-fx-background-color: white;" text="card emulator" textFill="#3700ff" />
->>>>>>> feat/receipts
                                             </children>
                                         </VBox>
                                     </right>
                                     <center>
                                         <VBox alignment="CENTER_LEFT" prefHeight="256.0" prefWidth="224.0" BorderPane.alignment="CENTER">
                                             <children>
-<<<<<<< HEAD
-                                                <Label fx:id="selectedProductLabel" text="Selected Product">
-=======
                                                 <Label fx:id="selectedProductLabel" text="Selected Product" wrapText="true">
->>>>>>> feat/receipts
                                                     <font>
                                                         <Font name="Comic Sans MS Bold" size="17.0" />
                                                     </font>

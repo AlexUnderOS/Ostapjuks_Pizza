@@ -22,8 +22,6 @@ public class IngredientBox {
     ToggleGroup group = new ToggleGroup();
     private String selectedIngredient;
 
-    private List<TextField> textFieldQuantities = new ArrayList<>();
-
     public HBox createBox(String ingredient, int quantity) {
 
         HBox hbox = new HBox();
@@ -41,7 +39,6 @@ public class IngredientBox {
         TextField textFieldQuantity = new TextField(String.valueOf(quantity));
         textFieldQuantity.setFont(new Font(15));
         textFieldQuantity.setMaxWidth(Region.USE_COMPUTED_SIZE);
-        textFieldQuantities.add(textFieldQuantity);
 
         JFXRadioButton radioButton = new JFXRadioButton("");
         radioButton.setToggleGroup(group);
