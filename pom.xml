@@ -25,18 +25,30 @@
             <artifactId>javafx-fxml</artifactId>
             <version>22-ea+11</version>
         </dependency>
+<<<<<<< HEAD
 
+=======
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.3</version>
+        </dependency>
+>>>>>>> feat/db
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.17.0</version>
         </dependency>
+<<<<<<< HEAD
 
+=======
+>>>>>>> feat/db
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.10.1</version>
         </dependency>
+<<<<<<< HEAD
 
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
@@ -44,6 +56,8 @@
             <version>1.1.1</version>
         </dependency>
 
+=======
+>>>>>>> feat/db
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -56,12 +70,24 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+<<<<<<< HEAD
 
+=======
+>>>>>>> feat/db
         <dependency>
             <groupId>com.jfoenix</groupId>
             <artifactId>jfoenix</artifactId>
             <version>9.0.10</version>
         </dependency>
+<<<<<<< HEAD
+=======
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>13.0</version>
+            <scope>compile</scope>
+        </dependency>
+>>>>>>> feat/db
     </dependencies>
 
     <build>
@@ -84,7 +110,11 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
+<<<<<<< HEAD
                             <mainClass>com.alexosta.ostapjuks_pizza/com.alexosta.ostapjuks_pizza.HelloApplication
+=======
+                            <mainClass>com.alexosta.ostapjuks_pizza/com.alexosta.ostapjuks_pizzeriaRegister.HelloApplication
+>>>>>>> feat/db
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
