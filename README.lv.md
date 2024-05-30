@@ -13,6 +13,8 @@
 
 ---
 
+> Video instrukcija - [https://failiem.lv/u/7dru355rx9](https://failiem.lv/f/wz3fyavqvf)
+
 ## Instrukcijas
 
 ### Pieteikšanās sistēmā
