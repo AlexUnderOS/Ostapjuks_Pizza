@@ -8,9 +8,9 @@ import java.util.logging.Logger;
 
 public class DBWorkers {
 
-    private static final String url = "jdbc:postgresql://localhost:5432/users_info";
-    private static final String user = "postgres";
-    private static final String password = "Parole01!";
+    private static final String url = "jdbc:postgresql://aws-0-eu-central-1.pooler.supabase.com:6543/postgres";
+    private static final String user = "postgres.xmcmzqjbrnjvelcauurb";
+    private static final String password = "S$s7J!D/zic3t3V";
 
     public static void writeToDatabase(String userName, String userPassword, boolean isAdmin) {
 

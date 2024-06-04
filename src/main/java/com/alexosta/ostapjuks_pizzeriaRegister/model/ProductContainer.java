@@ -181,10 +181,14 @@ public class ProductContainer {
         }
     }
 
+    private static final String url = "jdbc:postgresql://aws-0-eu-central-1.pooler.supabase.com:6543/postgres";
+    private static final String user = "postgres.xmcmzqjbrnjvelcauurb";
+    private static final String password = "S$s7J!D/zic3t3V";
+
     public List<Pair<String, Pair<Integer, Integer>>> getIngredientQuantities(String productName) {
         List<Pair<String, Pair<Integer, Integer>>> ingredientQuantities = new ArrayList<>();
 
-        try (Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/products", "postgres", "Parole01!")) {
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
             String query =
                     "SELECT ingredient_quantity.ingredient, " +
                             "COALESCE(SUM(splitted_ingredients.quantity), 0) AS required_quantity, " +

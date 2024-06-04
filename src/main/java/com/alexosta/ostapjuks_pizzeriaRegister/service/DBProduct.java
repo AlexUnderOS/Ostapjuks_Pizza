@@ -10,9 +10,9 @@ import java.util.stream.Collectors;
 
 public class DBProduct {
 
-    private static final String url = "jdbc:postgresql://localhost:5432/products";
-    private static final String user = "postgres";
-    private static final String password = "Parole01!";
+    private static final String url = "jdbc:postgresql://aws-0-eu-central-1.pooler.supabase.com:6543/postgres";
+    private static final String user = "postgres.xmcmzqjbrnjvelcauurb";
+    private static final String password = "S$s7J!D/zic3t3V";
 
     public static void writeToDatabase(String category, double price, String image, String name, String ingredientList, int minutes) {
 
@@ -48,6 +48,7 @@ public class DBProduct {
                 } catch (SQLException ex) {
                     Logger lgr = Logger.getLogger(DBProduct.class.getName());
                     lgr.log(Level.SEVERE, "error in inserting into splitted_ingredients: " + ex.getMessage(), ex);
+
                 }
             }
         }catch (SQLException ex) {
@@ -158,10 +159,11 @@ public class DBProduct {
                 .collect(Collectors.toList());
     }
 
-    public static List<Long> getIngredientQuantityFromDatabase() {
+    public static List<Short> getIngredientQuantityFromDatabase() {
         return getIngredientsFromDatabase("SELECT quantity FROM ingredient_quantity", "quantity")
                 .stream()
-                .map(Long.class::cast)
+                .map(Integer.class::cast) // Приведение к Integer
+                .map(Integer::shortValue) // Преобразование к Short
                 .collect(Collectors.toList());
     }
 

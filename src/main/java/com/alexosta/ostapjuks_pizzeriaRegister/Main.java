@@ -12,11 +12,10 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         dialog.showLoginDialog(true);
-
         MenuController menuController = new MenuController();
         stage = menuController.getStageOfMenuScene();
-
         stage.show();
+
     }
 
     public static void main(String[] args) {
@@ -26,4 +25,5 @@ public class Main extends Application {
     public static LoginDialog getDialog() {
         return dialog;
     }
+
 }

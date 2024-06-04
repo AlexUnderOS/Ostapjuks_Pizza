@@ -140,7 +140,7 @@ public class MenuController {
     private void updateIngredientsListView() {
         ingredientListVBox.getChildren().clear();
         List<String> ingredient = DBProduct.getIngredientsFromDatabase();
-        List<Long> quantity = DBProduct.getIngredientQuantityFromDatabase();
+        List<Short> quantity = DBProduct.getIngredientQuantityFromDatabase();
 
         for (int i = 0; i < ingredient.size(); i++) {
             HBox hBox = ingredientBox.createBox(ingredient.get(i), Math.toIntExact(quantity.get(i)));

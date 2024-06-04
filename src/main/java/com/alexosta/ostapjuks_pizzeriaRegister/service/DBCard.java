@@ -3,9 +3,9 @@ package com.alexosta.ostapjuks_pizzeriaRegister.service;
 import java.sql.*;
 
 public class DBCard {
-    private static final String url = "jdbc:postgresql://localhost:5432/user_card";
-    private static final String user = "postgres";
-    private static final String password = "Parole01!";
+    private static final String url = "jdbc:postgresql://aws-0-eu-central-1.pooler.supabase.com:6543/postgres";
+    private static final String user = "postgres.xmcmzqjbrnjvelcauurb";
+    private static final String password = "S$s7J!D/zic3t3V";
 
     public static boolean checkCard(String cardNumber) {
         String query = "SELECT * FROM card WHERE number = ?";
